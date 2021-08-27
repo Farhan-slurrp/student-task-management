@@ -24,11 +24,6 @@ const typeDefs = gql`
     date: Date
   }
 
-  input EventInput {
-    title: String
-    date: Date
-  }
-
   type User {
     email: String
     fullname: String
@@ -42,12 +37,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(
-      email: String!
-      fullname: String!
-      profPict: String!
-      events: [EventInput]
-    ): Boolean
+    addUser(email: String!, fullname: String!, profPict: String!): Boolean
   }
 `;
 
@@ -64,7 +54,7 @@ const resolvers = {
     },
     user: async (_, { email }) => {
       const user = await User.findOne({ email });
-      if (!user) return {};
+      if (!user) return null;
       return {
         email: user.email,
         fullname: user.name,
@@ -75,12 +65,11 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (_, { email, fullname, profPict, events }) => {
+    addUser: async (_, { email, fullname, profPict }) => {
       const newUser = new User({
         email,
         name: fullname,
         profPict,
-        events: events || [],
       });
 
       const success = await newUser.save();
