@@ -1,5 +1,6 @@
 const { ApolloServer, gql } = require("apollo-server");
 const mongoose = require("mongoose");
+const { events } = require("./models/UserSchema");
 require("dotenv").config();
 
 mongoose.connect(process.env.DB_URL, {
@@ -21,7 +22,9 @@ const typeDefs = gql`
 
   type Event {
     title: String
-    date: Date
+    start: Date
+    end: Date
+    allDay: Boolean
   }
 
   type User {
@@ -38,6 +41,13 @@ const typeDefs = gql`
 
   type Mutation {
     addUser(email: String!, fullname: String!, profPict: String!): Boolean
+    addEvent(
+      email: String!
+      title: String!
+      start: Date!
+      end: Date
+      allDay: Boolean
+    ): Boolean
   }
 `;
 
@@ -59,13 +69,22 @@ const resolvers = {
         email: user.email,
         fullname: user.name,
         profPict: user.profPict,
-        events: user.events,
+        events: user.events.map((event) => ({
+          title: event.title,
+          start: event.start,
+          end: event.end,
+          allDay: event.allDay,
+        })),
       };
     },
   },
 
   Mutation: {
     addUser: async (_, { email, fullname, profPict }) => {
+      const user = await User.findOne({ email });
+
+      if (user) return false;
+
       const newUser = new User({
         email,
         name: fullname,
@@ -76,12 +95,29 @@ const resolvers = {
       if (success) return true;
       return false;
     },
+
+    addEvent: async (_, { email, title, start, end, allDay }) => {
+      const newEvent = {
+        title,
+        start,
+        end: end || null,
+        allDay: allDay,
+      };
+      const user = await User.findOne({ email });
+      if (user) {
+        user.events.push(newEvent);
+        const isUserSaved = await user.save();
+        console.log(user);
+        if (isUserSaved) return true;
+      }
+      return false;
+    },
   },
 };
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
 // The `listen` method launches a web server.
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
+server.listen({ port: 8001 }).then(({ url }) => {
+  console.log(`Server ready at ${url}🚀`);
 });
