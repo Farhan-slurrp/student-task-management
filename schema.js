@@ -11,11 +11,30 @@ exports.typeDefs = gql`
     allDay: Boolean
   }
 
+  type PersonalTask {
+    id: ID
+    content: String!
+    status: String
+    progress: Float
+    sectionId: ID!
+    createdAt: Date
+    dueDate: Date
+    priority: String
+  }
+
+  type TaskSection {
+    id: ID
+    title: String
+    userEmail: String!
+    tasks: [PersonalTask]
+  }
+
   type User {
     email: String
     fullname: String
     profPict: String
     events: [Event]
+    taskSections: [TaskSection]
   }
 
   type Query {
@@ -41,5 +60,6 @@ exports.typeDefs = gql`
       allDay: Boolean!
     ): Boolean
     deleteEvent(email: String!, id: ID!): Boolean
+    addTaskSection(title: String!, userEmail: String!): Boolean
   }
 `;

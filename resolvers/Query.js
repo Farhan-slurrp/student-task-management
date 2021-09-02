@@ -1,6 +1,6 @@
 const Query = {
-  users: async (parent, args, { User }) => {
-    const users = await User.find();
+  users: async (parent, args, { UserModel }) => {
+    const users = await UserModel.find();
     return users.map((user) => ({
       email: user.email,
       fullname: user.name,
@@ -8,8 +8,8 @@ const Query = {
       events: user.events,
     }));
   },
-  user: async (parent, { email }, { User }) => {
-    const user = await User.findOne({ email });
+  user: async (parent, { email }, { UserModel }) => {
+    const user = await UserModel.findOne({ email });
     if (!user) return null;
     return {
       email: user.email,

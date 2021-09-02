@@ -5,8 +5,6 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   profPict: { type: String, required: true },
   events: { type: Array, required: false },
-  taskSections: { type: Array, required: false },
-  noteSections: { type: Array, required: false },
 });
 
 const User = mongoose.model("User", userSchema, "User");

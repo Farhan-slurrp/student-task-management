@@ -1,12 +1,13 @@
 const { v4: uuidv4 } = require("uuid");
 
 const Mutation = {
-  addUser: async (parent, { email, fullname, profPict }, { User }) => {
-    const user = await User.findOne({ email });
+  // add new user
+  addUser: async (parent, { email, fullname, profPict }, { UserModel }) => {
+    const user = await UserModel.findOne({ email });
 
     if (user) return false;
 
-    const newUser = new User({
+    const newUser = new UserModel({
       email,
       name: fullname,
       profPict,
@@ -17,7 +18,12 @@ const Mutation = {
     return false;
   },
 
-  addEvent: async (parent, { email, title, start, end, allDay }, { User }) => {
+  // add new event
+  addEvent: async (
+    parent,
+    { email, title, start, end, allDay },
+    { UserModel }
+  ) => {
     const newEvent = {
       id: uuidv4(),
       title,
@@ -25,7 +31,7 @@ const Mutation = {
       end: end || null,
       allDay: allDay,
     };
-    const user = await User.findOne({ email });
+    const user = await UserModel.findOne({ email });
     if (user) {
       user.events.push(newEvent);
       const isUserSaved = await user.save();
@@ -34,10 +40,11 @@ const Mutation = {
     return false;
   },
 
+  // edit existing event
   editEvent: async (
     parent,
     { email, id, title, start, end, allDay },
-    { User }
+    { UserModel }
   ) => {
     const newEventData = {
       id,
@@ -46,7 +53,7 @@ const Mutation = {
       end: end || null,
       allDay: allDay,
     };
-    const user = await User.findOne({ email });
+    const user = await UserModel.findOne({ email });
     if (user) {
       const eventIndex = user.events.indexOf(
         user.events.filter((event) => event.id === id)[0]
@@ -57,13 +64,31 @@ const Mutation = {
     }
     return false;
   },
-  deleteEvent: async (parent, { email, id }, { User }) => {
-    const user = await User.findOne({ email });
+
+  // delete an event
+  deleteEvent: async (parent, { email, id }, { UserModel }) => {
+    const user = await UserModel.findOne({ email });
     if (user) {
       user.events = user.events.filter((event) => event.id !== id);
       const isUserSaved = await user.save();
       if (isUserSaved) return true;
     }
+    return false;
+  },
+
+  // add task section for a user
+  addTaskSection: async (
+    parent,
+    { title, userEmail },
+    { TaskSectionModel }
+  ) => {
+    const newTaskSection = new TaskSectionModel({
+      title,
+      userEmail,
+    });
+
+    const success = await newTaskSection.save();
+    if (success) return true;
     return false;
   },
 };

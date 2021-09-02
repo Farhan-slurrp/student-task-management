@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const { typeDefs } = require("./schema");
 const Query = require("./resolvers/Query");
 const Mutation = require("./resolvers/Mutation.js");
+const User = require("./resolvers/User");
+const TaskSection = require("./resolvers/TaskSection");
 
 require("dotenv").config();
 
@@ -11,7 +13,9 @@ mongoose.connect(process.env.DB_URL, {
   useUnifiedTopology: true,
 });
 
-const User = require("./models/UserSchema");
+const UserModel = require("./models/UserSchema");
+const TaskSectionModel = require("./models/TaskSectionSchema");
+const PersonalTaskModel = require("./models/PersonalTaskSchema");
 
 db = mongoose.connection;
 
@@ -25,9 +29,13 @@ const server = new ApolloServer({
   resolvers: {
     Query,
     Mutation,
+    User,
+    TaskSection,
   },
   context: {
-    User,
+    UserModel,
+    TaskSectionModel,
+    PersonalTaskModel,
   },
 });
 
