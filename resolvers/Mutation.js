@@ -91,6 +91,34 @@ const Mutation = {
     if (success) return true;
     return false;
   },
+
+  // delete task section
+  deleteTaskSection: async (parent, { email, id }, { TaskSectionModel }) => {
+    const section = await TaskSectionModel.findById(id);
+    if (section && section.userEmail === email) {
+      const success = await TaskSectionModel.findByIdAndDelete(id);
+      if (success) return true;
+    }
+    return false;
+  },
+
+  // edittask section
+  editTaskSection: async (
+    parent,
+    { email, id, title },
+    { TaskSectionModel }
+  ) => {
+    const section = await TaskSectionModel.findById(id);
+    if (section && section.userEmail === email) {
+      const success = await TaskSectionModel.findByIdAndUpdate(id, {
+        $set: {
+          title,
+        },
+      });
+      if (success) return true;
+    }
+    return false;
+  },
 };
 
 module.exports = Mutation;

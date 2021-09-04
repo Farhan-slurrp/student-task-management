@@ -61,5 +61,7 @@ exports.typeDefs = gql`
     ): Boolean
     deleteEvent(email: String!, id: ID!): Boolean
     addTaskSection(title: String!, userEmail: String!): Boolean
+    deleteTaskSection(email: String!, id: ID!): Boolean
+    editTaskSection(email: String!, id: ID!, title: String!): Boolean
   }
 `;
