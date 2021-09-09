@@ -63,5 +63,25 @@ exports.typeDefs = gql`
     addTaskSection(title: String!, userEmail: String!): Boolean
     deleteTaskSection(email: String!, id: ID!): Boolean
     editTaskSection(email: String!, id: ID!, title: String!): Boolean
+    addPersonalTask(
+      content: String!
+      status: String
+      progress: Float
+      sectionId: ID!
+      createdAt: Date
+      dueDate: Date
+      priority: String
+    ): Boolean
+    editPersonalTask(
+      id: ID!
+      content: String!
+      status: String
+      progress: Float
+      sectionId: ID!
+      createdAt: Date
+      dueDate: Date
+      priority: String
+    ): Boolean
+    deletePersonalTask(id: ID!): Boolean
   }
 `;

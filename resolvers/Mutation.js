@@ -119,6 +119,71 @@ const Mutation = {
     }
     return false;
   },
+
+  // add personal task
+  // id: ID
+  // content: String!
+  // status: String
+  // progress: Float
+  // sectionId: ID!
+  // createdAt: Date
+  // dueDate: Date
+  // priority: String
+  addPersonalTask: async (
+    parent,
+    { content, status, progress, sectionId, createdAt, dueDate, priority },
+    { PersonalTaskModel }
+  ) => {
+    const newTask = new PersonalTaskModel({
+      content,
+      status,
+      progress,
+      sectionId,
+      createdAt,
+      dueDate,
+      priority,
+    });
+
+    const success = await newTask.save();
+    if (success) return true;
+    return false;
+  },
+
+  // edit personal task
+  // id: ID
+  // content: String!
+  // status: String
+  // progress: Float
+  // sectionId: ID!
+  // createdAt: Date
+  // dueDate: Date
+  // priority: String
+  editPersonalTask: async (
+    parent,
+    { id, content, status, progress, sectionId, createdAt, dueDate, priority },
+    { PersonalTaskModel }
+  ) => {
+    const success = await PersonalTaskModel.findByIdAndUpdate(id, {
+      $set: {
+        content,
+        status,
+        progress,
+        sectionId,
+        createdAt,
+        dueDate,
+        priority,
+      },
+    });
+    if (success) return true;
+    return false;
+  },
+
+  // delete personal task
+  deletePersonalTask: async (parent, { id }, { PersonalTaskModel }) => {
+    const success = await PersonalTaskModel.findByIdAndDelete(id);
+    if (success) return true;
+    return false;
+  },
 };
 
 module.exports = Mutation;
