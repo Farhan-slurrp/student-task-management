@@ -22,11 +22,26 @@ exports.typeDefs = gql`
     priority: String
   }
 
+  type PersonalNote {
+    id: ID
+    title: String!
+    content: String!
+    createdAt: Date
+    sectionId: ID!
+  }
+
   type TaskSection {
     id: ID
     title: String
     userEmail: String!
     tasks: [PersonalTask]
+  }
+
+  type NoteSection {
+    id: ID
+    title: String
+    userEmail: String!
+    notes: [PersonalNote]
   }
 
   type User {
@@ -35,6 +50,7 @@ exports.typeDefs = gql`
     profPict: String
     events: [Event]
     taskSections: [TaskSection]
+    noteSections: [NoteSection]
   }
 
   type Query {
@@ -83,5 +99,8 @@ exports.typeDefs = gql`
       priority: String
     ): Boolean
     deletePersonalTask(id: ID!): Boolean
+    addNoteSection(title: String!, userEmail: String!): Boolean
+    deleteNoteSection(email: String!, id: ID!): Boolean
+    editNoteSection(email: String!, id: ID!, title: String!): Boolean
   }
 `;

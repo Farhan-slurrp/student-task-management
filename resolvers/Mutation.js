@@ -102,7 +102,7 @@ const Mutation = {
     return false;
   },
 
-  // edittask section
+  // edit task section
   editTaskSection: async (
     parent,
     { email, id, title },
@@ -182,6 +182,50 @@ const Mutation = {
   deletePersonalTask: async (parent, { id }, { PersonalTaskModel }) => {
     const success = await PersonalTaskModel.findByIdAndDelete(id);
     if (success) return true;
+    return false;
+  },
+
+  // add note section for a user
+  addNoteSection: async (
+    parent,
+    { title, userEmail },
+    { NoteSectionModel }
+  ) => {
+    const newNoteSection = new NoteSectionModel({
+      title,
+      userEmail,
+    });
+
+    const success = await newNoteSection.save();
+    if (success) return true;
+    return false;
+  },
+
+  // delete note section
+  deleteNoteSection: async (parent, { email, id }, { NoteSectionModel }) => {
+    const section = await NoteSectionModel.findById(id);
+    if (section && section.userEmail === email) {
+      const success = await NoteSectionModel.findByIdAndDelete(id);
+      if (success) return true;
+    }
+    return false;
+  },
+
+  // edit note section
+  editNoteSection: async (
+    parent,
+    { email, id, title },
+    { NoteSectionModel }
+  ) => {
+    const section = await NoteSectionModel.findById(id);
+    if (section && section.userEmail === email) {
+      const success = await NoteSectionModel.findByIdAndUpdate(id, {
+        $set: {
+          title,
+        },
+      });
+      if (success) return true;
+    }
     return false;
   },
 };

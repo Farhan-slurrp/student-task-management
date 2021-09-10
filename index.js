@@ -5,6 +5,7 @@ const Query = require("./resolvers/Query");
 const Mutation = require("./resolvers/Mutation.js");
 const User = require("./resolvers/User");
 const TaskSection = require("./resolvers/TaskSection");
+const NoteSection = require("./resolvers/NoteSection");
 
 require("dotenv").config();
 
@@ -16,6 +17,8 @@ mongoose.connect(process.env.DB_URL, {
 const UserModel = require("./models/UserSchema");
 const TaskSectionModel = require("./models/TaskSectionSchema");
 const PersonalTaskModel = require("./models/PersonalTaskSchema");
+const NoteSectionModel = require("./models/NoteSectionSchema");
+const PersonalNoteModel = require("./models/PersonalNoteSchema");
 
 db = mongoose.connection;
 
@@ -31,11 +34,14 @@ const server = new ApolloServer({
     Mutation,
     User,
     TaskSection,
+    NoteSection,
   },
   context: {
     UserModel,
     TaskSectionModel,
     PersonalTaskModel,
+    NoteSectionModel,
+    PersonalNoteModel,
   },
 });
 
