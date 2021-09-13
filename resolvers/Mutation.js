@@ -160,7 +160,7 @@ const Mutation = {
   // priority: String
   editPersonalTask: async (
     parent,
-    { id, content, status, progress, sectionId, createdAt, dueDate, priority },
+    { id, content, status, progress, sectionId, updatedAt, dueDate, priority },
     { PersonalTaskModel }
   ) => {
     const success = await PersonalTaskModel.findByIdAndUpdate(id, {
@@ -169,7 +169,7 @@ const Mutation = {
         status,
         progress,
         sectionId,
-        createdAt,
+        updatedAt,
         dueDate,
         priority,
       },
@@ -226,6 +226,58 @@ const Mutation = {
       });
       if (success) return true;
     }
+    return false;
+  },
+
+  // add personal note
+  // title: String!
+  // content: String!
+  // createdAt: Date
+  // sectionId: ID!
+  addPersonalNote: async (
+    parent,
+    { title, content, createdAt, sectionId },
+    { PersonalNoteModel }
+  ) => {
+    const newNote = new PersonalNoteModel({
+      title,
+      content,
+      createdAt,
+      sectionId,
+    });
+
+    const success = await newNote.save();
+    if (success) return true;
+    return false;
+  },
+
+  // delete personal Note
+  deletePersonalNote: async (parent, { id }, { PersonalNoteModel }) => {
+    const success = await PersonalNoteModel.findByIdAndDelete(id);
+    if (success) return true;
+    return false;
+  },
+
+  // edit personal note
+  // id: ID
+  // title: String!
+  // content: String!
+  // updatedAt: Date
+  // sectionId: ID!
+  editPersonalNote: async (
+    parent,
+    { id, title, content, updatedAt, sectionId },
+    { PersonalNoteModel }
+  ) => {
+    const success = await PersonalNoteModel.findByIdAndUpdate(id, {
+      $set: {
+        title,
+        content,
+        updatedAt,
+        sectionId,
+      },
+    });
+    if (success) return true;
     return false;
   },
 };

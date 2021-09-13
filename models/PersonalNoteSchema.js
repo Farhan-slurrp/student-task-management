@@ -5,6 +5,7 @@ const personalNoteSchema = new mongoose.Schema({
   content: { type: String, required: true },
   createdAt: { type: Date, required: true },
   sectionId: { type: mongoose.Schema.Types.ObjectId, required: true },
+  updatedAt: { type: Date, required: false },
 });
 
 const PersonalNote = mongoose.model(

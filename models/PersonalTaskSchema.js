@@ -8,6 +8,7 @@ const personalTaskSchema = new mongoose.Schema({
   createdAt: { type: Date, required: true },
   dueDate: { type: Date, required: false },
   priority: { type: String, required: true },
+  updatedAt: { type: Date, required: false },
 });
 
 const PersonalTask = mongoose.model(

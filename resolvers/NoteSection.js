@@ -7,6 +7,7 @@ const NoteSection = {
       content: note.content,
       createdAt: note.createdAt,
       sectionId: note.sectionId,
+      updatedAt: note.updatedAt,
     }));
   },
 };

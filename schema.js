@@ -20,6 +20,7 @@ exports.typeDefs = gql`
     createdAt: Date
     dueDate: Date
     priority: String
+    updatedAt: Date
   }
 
   type PersonalNote {
@@ -28,6 +29,7 @@ exports.typeDefs = gql`
     content: String!
     createdAt: Date
     sectionId: ID!
+    updatedAt: Date
   }
 
   type TaskSection {
@@ -94,7 +96,7 @@ exports.typeDefs = gql`
       status: String
       progress: Float
       sectionId: ID!
-      createdAt: Date
+      updatedAt: Date
       dueDate: Date
       priority: String
     ): Boolean
@@ -102,5 +104,19 @@ exports.typeDefs = gql`
     addNoteSection(title: String!, userEmail: String!): Boolean
     deleteNoteSection(email: String!, id: ID!): Boolean
     editNoteSection(email: String!, id: ID!, title: String!): Boolean
+    addPersonalNote(
+      title: String!
+      content: String!
+      createdAt: Date
+      sectionId: ID!
+    ): Boolean
+    deletePersonalNote(id: ID!): Boolean
+    editPersonalNote(
+      id: ID!
+      title: String!
+      content: String!
+      updatedAt: Date
+      sectionId: ID!
+    ): Boolean
   }
 `;
