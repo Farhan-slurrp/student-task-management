@@ -280,6 +280,35 @@ const Mutation = {
     if (success) return true;
     return false;
   },
+
+  // create new room
+  createRoom: async (parent, { roomName, userEmail }, { RoomModel }) => {
+    const newRoom = new RoomModel({
+      roomName,
+      members: [{ email: userEmail, isAdmin: true }],
+    });
+
+    const success = await newRoom.save();
+    if (success) return true;
+    return false;
+  },
+
+  // join to room
+  joinRoom: async (parent, { roomID, userEmail }, { RoomModel }) => {
+    const newMember = { email: userEmail, isAdmin: false };
+    const room = await RoomModel.findById(roomID);
+
+    const isExist = room.members.find((member) => member.email === userEmail);
+    if (isExist) return false;
+
+    const success = await RoomModel.findByIdAndUpdate(roomID, {
+      $set: {
+        members: [...room.members, newMember],
+      },
+    });
+    if (success) return true;
+    return false;
+  },
 };
 
 module.exports = Mutation;

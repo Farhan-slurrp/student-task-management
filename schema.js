@@ -23,6 +23,13 @@ exports.typeDefs = gql`
     updatedAt: Date
   }
 
+  type TaskSection {
+    id: ID
+    title: String
+    userEmail: String!
+    tasks: [PersonalTask]
+  }
+
   type PersonalNote {
     id: ID
     title: String!
@@ -30,13 +37,6 @@ exports.typeDefs = gql`
     createdAt: Date
     sectionId: ID!
     updatedAt: Date
-  }
-
-  type TaskSection {
-    id: ID
-    title: String
-    userEmail: String!
-    tasks: [PersonalTask]
   }
 
   type NoteSection {
@@ -53,6 +53,18 @@ exports.typeDefs = gql`
     events: [Event]
     taskSections: [TaskSection]
     noteSections: [NoteSection]
+    rooms: [Room]
+  }
+
+  type RoomMember {
+    userData: User
+    isAdmin: Boolean
+  }
+
+  type Room {
+    id: ID
+    roomName: String
+    members: [RoomMember]
   }
 
   type Query {
@@ -118,5 +130,7 @@ exports.typeDefs = gql`
       updatedAt: Date
       sectionId: ID!
     ): Boolean
+    createRoom(roomName: String!, userEmail: String!): Boolean
+    joinRoom(roomID: ID!, userEmail: String!): Boolean
   }
 `;

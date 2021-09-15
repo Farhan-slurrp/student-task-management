@@ -17,6 +17,14 @@ const User = {
       notes: section.notes,
     }));
   },
+  rooms: async ({ email }, args, { RoomModel }) => {
+    let rooms = await RoomModel.find();
+    rooms = rooms.filter((room) =>
+      room.members.map((member) => member.email === email)
+    );
+
+    return rooms;
+  },
 };
 
 module.exports = User;

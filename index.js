@@ -6,6 +6,7 @@ const Mutation = require("./resolvers/Mutation.js");
 const User = require("./resolvers/User");
 const TaskSection = require("./resolvers/TaskSection");
 const NoteSection = require("./resolvers/NoteSection");
+const Room = require("./resolvers/Room");
 
 require("dotenv").config();
 
@@ -19,6 +20,7 @@ const TaskSectionModel = require("./models/TaskSectionSchema");
 const PersonalTaskModel = require("./models/PersonalTaskSchema");
 const NoteSectionModel = require("./models/NoteSectionSchema");
 const PersonalNoteModel = require("./models/PersonalNoteSchema");
+const RoomModel = require("./models/RoomSchema");
 
 db = mongoose.connection;
 
@@ -33,6 +35,7 @@ const server = new ApolloServer({
     Query,
     Mutation,
     User,
+    Room,
     TaskSection,
     NoteSection,
   },
@@ -42,6 +45,7 @@ const server = new ApolloServer({
     PersonalTaskModel,
     NoteSectionModel,
     PersonalNoteModel,
+    RoomModel,
   },
 });
 
