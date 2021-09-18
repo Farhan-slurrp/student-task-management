@@ -296,16 +296,35 @@ const Mutation = {
   // join to room
   joinRoom: async (parent, { roomID, userEmail }, { RoomModel }) => {
     const newMember = { email: userEmail, isAdmin: false };
+    try {
+      const room = await RoomModel.findById(roomID);
+
+      const isExist = room.members.find((member) => member.email === userEmail);
+      if (isExist)
+        return { success: false, message: "You already joined the room" };
+
+      const success = await RoomModel.findByIdAndUpdate(roomID, {
+        $set: {
+          members: [...room.members, newMember],
+        },
+      });
+      if (success)
+        return { success: true, message: "Success to join the room" };
+    } catch (err) {
+      if (err.kind == "ObjectId") {
+        return { success: false, message: "Invalid room ID" };
+      }
+      return { success: false, message: "An error occured" };
+    }
+  },
+
+  // leave to room
+  leaveRoom: async (parent, { roomID, userEmail }, { RoomModel }) => {
     const room = await RoomModel.findById(roomID);
+    const members = room.members.filter((member) => member.email != userEmail);
+    room.members = members;
 
-    const isExist = room.members.find((member) => member.email === userEmail);
-    if (isExist) return false;
-
-    const success = await RoomModel.findByIdAndUpdate(roomID, {
-      $set: {
-        members: [...room.members, newMember],
-      },
-    });
+    const success = await room.save();
     if (success) return true;
     return false;
   },

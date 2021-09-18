@@ -67,6 +67,11 @@ exports.typeDefs = gql`
     members: [RoomMember]
   }
 
+  type SuccessMessage {
+    success: Boolean
+    message: String
+  }
+
   type Query {
     users: [User]
     user(email: String): User
@@ -131,6 +136,7 @@ exports.typeDefs = gql`
       sectionId: ID!
     ): Boolean
     createRoom(roomName: String!, userEmail: String!): Boolean
-    joinRoom(roomID: ID!, userEmail: String!): Boolean
+    joinRoom(roomID: ID!, userEmail: String!): SuccessMessage
+    leaveRoom(roomID: ID!, userEmail: String!): Boolean
   }
 `;

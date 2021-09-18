@@ -19,11 +19,11 @@ const User = {
   },
   rooms: async ({ email }, args, { RoomModel }) => {
     let rooms = await RoomModel.find();
-    rooms = rooms.filter((room) =>
-      room.members.map((member) => member.email === email)
+    userRooms = rooms.filter((room) =>
+      room.members.find((member) => member.email === email)
     );
 
-    return rooms;
+    return userRooms;
   },
 };
 
