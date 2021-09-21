@@ -65,11 +65,27 @@ exports.typeDefs = gql`
     id: ID
     roomName: String
     members: [RoomMember]
+    tasks: [RoomTask]
   }
 
   type SuccessMessage {
     success: Boolean
     message: String
+  }
+
+  type RoomTask {
+    id: ID
+    content: String!
+    status: String
+    progress: Float
+    roomId: ID!
+    createdAt: Date
+    createdBy: User
+    workingOn: [User]
+    completedBy: User
+    dueDate: Date
+    priority: String
+    updatedAt: Date
   }
 
   type Query {
@@ -138,5 +154,29 @@ exports.typeDefs = gql`
     createRoom(roomName: String!, userEmail: String!): Boolean
     joinRoom(roomID: ID!, userEmail: String!): SuccessMessage
     leaveRoom(roomID: ID!, userEmail: String!): Boolean
+    addRoomTask(
+      content: String!
+      status: String
+      progress: Float
+      roomId: ID!
+      createdAt: Date
+      createdBy: String
+      dueDate: Date
+      priority: String
+    ): Boolean
+    editRoomTask(
+      id: ID!
+      content: String!
+      status: String
+      progress: Float
+      roomId: ID!
+      updatedAt: Date
+      workingOn: String
+      completedBy: String
+      dueDate: Date
+      priority: String
+    ): Boolean
+    stopWorkingOnTask(id: ID!, updatedAt: Date, workingOn: String): Boolean
+    deleteRoomTask(id: ID!): Boolean
   }
 `;

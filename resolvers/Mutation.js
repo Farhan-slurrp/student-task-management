@@ -328,6 +328,133 @@ const Mutation = {
     if (success) return true;
     return false;
   },
+
+  // add room task
+  // id: ID
+  // content: String!
+  // status: String
+  // progress: Float
+  // roomId: ID!
+  // createdAt: Date
+  // createdBy: String
+  // dueDate: Date
+  // priority: String
+  addRoomTask: async (
+    parent,
+    {
+      content,
+      status,
+      progress,
+      roomId,
+      createdAt,
+      createdBy,
+      dueDate,
+      priority,
+    },
+    { RoomTaskModel }
+  ) => {
+    const newTask = new RoomTaskModel({
+      content,
+      status,
+      progress,
+      roomId,
+      createdAt,
+      createdBy,
+      dueDate,
+      priority,
+    });
+
+    const success = await newTask.save();
+    if (success) return true;
+    return false;
+  },
+
+  // delete room task
+  deleteRoomTask: async (parent, { id }, { RoomTaskModel }) => {
+    const success = await RoomTaskModel.findByIdAndDelete(id);
+    if (success) return true;
+    return false;
+  },
+
+  // edit room task
+  // id: ID
+  // content,
+  // status,
+  // progress,
+  // roomId,
+  // createdAt,
+  // createdBy,
+  // workingOn,
+  // completedBy,
+  // dueDate,
+  // priority,
+  editRoomTask: async (
+    parent,
+    {
+      id,
+      content,
+      status,
+      progress,
+      roomId,
+      updatedAt,
+      workingOn,
+      completedBy,
+      dueDate,
+      priority,
+    },
+    { RoomTaskModel }
+  ) => {
+    const task = await RoomTaskModel.findById(id);
+    let newWorkingOn = [...task.workingOn];
+    let newCompletedBy = task.completedBy;
+
+    if (workingOn) newWorkingOn.push(workingOn);
+    if (completedBy) {
+      newCompletedBy = completedBy;
+    }
+
+    const success = await RoomTaskModel.findByIdAndUpdate(id, {
+      $set: {
+        content,
+        status,
+        progress,
+        roomId,
+        updatedAt,
+        workingOn: newWorkingOn,
+        completedBy: newCompletedBy,
+        dueDate,
+        priority,
+      },
+    });
+    if (success) return true;
+    return false;
+  },
+
+  // stop working on task
+  // id: ID
+  // updatedBy,
+  // workingOn,
+  stopWorkingOnTask: async (
+    parent,
+    { id, updatedAt, workingOn },
+    { RoomTaskModel }
+  ) => {
+    const task = await RoomTaskModel.findById(id);
+    let newWorkingOn = [...task.workingOn];
+
+    if (workingOn) {
+      newWorkingOn = newWorkingOn.filter((member) => member !== workingOn);
+    }
+
+    const success = await RoomTaskModel.findByIdAndUpdate(id, {
+      $set: {
+        updatedAt,
+        workingOn: newWorkingOn,
+      },
+    });
+    if (success) return true;
+    return false;
+  },
 };
 
 module.exports = Mutation;

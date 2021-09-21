@@ -22,6 +22,21 @@ const Room = {
     });
     return users;
   },
+  tasks: async ({ id }, args, { RoomTaskModel }) => {
+    const tasks = await RoomTaskModel.find({ roomId: id });
+    if (!tasks) return [];
+    return tasks.map((task) => ({
+      id: task._id,
+      content: task.content,
+      status: task.status,
+      progress: task.progress,
+      roomId: task.roomId,
+      createdAt: task.createdAt,
+      dueDate: task.dueDate,
+      priority: task.priority,
+      updatedAt: task.updatedAt,
+    }));
+  },
 };
 
 module.exports = Room;
