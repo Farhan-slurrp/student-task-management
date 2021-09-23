@@ -66,6 +66,7 @@ exports.typeDefs = gql`
     roomName: String
     members: [RoomMember]
     tasks: [RoomTask]
+    notes: [RoomNote]
   }
 
   type SuccessMessage {
@@ -86,6 +87,17 @@ exports.typeDefs = gql`
     dueDate: Date
     priority: String
     updatedAt: Date
+  }
+
+  type RoomNote {
+    id: ID
+    title: String!
+    content: String!
+    createdAt: Date
+    createdBy: User
+    roomId: ID!
+    updatedAt: Date
+    updatedBy: User
   }
 
   type Query {
@@ -178,5 +190,12 @@ exports.typeDefs = gql`
     ): Boolean
     stopWorkingOnTask(id: ID!, updatedAt: Date, workingOn: String): Boolean
     deleteRoomTask(id: ID!): Boolean
+    addRoomNote(
+      title: String!
+      content: String!
+      createdAt: Date
+      createdBy: String
+      roomId: ID!
+    ): Boolean
   }
 `;

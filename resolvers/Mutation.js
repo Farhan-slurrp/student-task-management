@@ -455,6 +455,29 @@ const Mutation = {
     if (success) return true;
     return false;
   },
+
+  // add room note
+  // title: String!
+  // content: String!
+  // createdAt: Date
+  // sectionId: ID!
+  addRoomNote: async (
+    parent,
+    { title, content, createdAt, createdBy, roomId },
+    { RoomNoteModel }
+  ) => {
+    const newNote = new RoomNoteModel({
+      title,
+      content,
+      createdAt,
+      createdBy,
+      roomId,
+    });
+
+    const success = await newNote.save();
+    if (success) return true;
+    return false;
+  },
 };
 
 module.exports = Mutation;

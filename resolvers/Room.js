@@ -37,6 +37,21 @@ const Room = {
       updatedAt: task.updatedAt,
     }));
   },
+
+  notes: async ({ id }, args, { RoomNoteModel }) => {
+    const notes = await RoomNoteModel.find({ roomId: id });
+    if (!notes) return [];
+    return notes.map((note) => ({
+      id: note._id,
+      title: note.title,
+      content: note.content,
+      createdAt: note.createdAt,
+      createdBy: note.createdBy,
+      roomId: note.roomId,
+      updatedAt: note.updatedAt,
+      updatedBy: note.updatedBy,
+    }));
+  },
 };
 
 module.exports = Room;

@@ -8,6 +8,7 @@ const TaskSection = require("./resolvers/TaskSection");
 const NoteSection = require("./resolvers/NoteSection");
 const Room = require("./resolvers/Room");
 const RoomTask = require("./resolvers/RoomTask");
+const RoomNote = require("./resolvers/RoomNote");
 
 require("dotenv").config();
 
@@ -23,6 +24,7 @@ const NoteSectionModel = require("./models/NoteSectionSchema");
 const PersonalNoteModel = require("./models/PersonalNoteSchema");
 const RoomModel = require("./models/RoomSchema");
 const RoomTaskModel = require("./models/RoomTaskSchema");
+const RoomNoteModel = require("./models/RoomNoteSchema");
 
 db = mongoose.connection;
 
@@ -41,6 +43,7 @@ const server = new ApolloServer({
     TaskSection,
     NoteSection,
     RoomTask,
+    RoomNote,
   },
   context: {
     UserModel,
@@ -50,6 +53,7 @@ const server = new ApolloServer({
     PersonalNoteModel,
     RoomModel,
     RoomTaskModel,
+    RoomNoteModel,
   },
 });
 
