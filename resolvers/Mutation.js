@@ -129,9 +129,19 @@ const Mutation = {
   // createdAt: Date
   // dueDate: Date
   // priority: String
+  // estimatedTime: Float
   addPersonalTask: async (
     parent,
-    { content, status, progress, sectionId, createdAt, dueDate, priority },
+    {
+      content,
+      status,
+      progress,
+      sectionId,
+      createdAt,
+      dueDate,
+      priority,
+      estimatedTime,
+    },
     { PersonalTaskModel }
   ) => {
     const newTask = new PersonalTaskModel({
@@ -142,6 +152,7 @@ const Mutation = {
       createdAt,
       dueDate,
       priority,
+      estimatedTime,
     });
 
     const success = await newTask.save();
@@ -158,9 +169,20 @@ const Mutation = {
   // createdAt: Date
   // dueDate: Date
   // priority: String
+  // estimatedTime: Float
   editPersonalTask: async (
     parent,
-    { id, content, status, progress, sectionId, updatedAt, dueDate, priority },
+    {
+      id,
+      content,
+      status,
+      progress,
+      sectionId,
+      updatedAt,
+      dueDate,
+      priority,
+      estimatedTime,
+    },
     { PersonalTaskModel }
   ) => {
     const success = await PersonalTaskModel.findByIdAndUpdate(id, {
@@ -172,6 +194,7 @@ const Mutation = {
         updatedAt,
         dueDate,
         priority,
+        estimatedTime,
       },
     });
     if (success) return true;
@@ -477,6 +500,60 @@ const Mutation = {
     const success = await newNote.save();
     if (success) return true;
     return false;
+  },
+
+  // edit room note
+  // id: ID!
+  // title: String!
+  // content: String!
+  // isAdmin: Boolean
+  // updatedAt: Date
+  // updatedBy: String
+  // roomId: ID!
+  editRoomNote: async (
+    parent,
+    { id, title, content, isAdmin, updatedAt, updatedBy, roomId },
+    { RoomNoteModel }
+  ) => {
+    const note = await RoomNoteModel.findById(id);
+
+    if (note.createdBy !== updatedBy && !isAdmin)
+      return {
+        success: false,
+        message: "You dont have authorization to edit the note",
+      };
+
+    const success = await RoomNoteModel.findByIdAndUpdate(id, {
+      $set: {
+        title,
+        content,
+        updatedAt,
+        updatedBy,
+        roomId,
+      },
+    });
+
+    if (success) return { success: true, message: "Note edited" };
+    return { success: false, message: "An error occured" };
+  },
+
+  // delete room Note
+  deleteRoomNote: async (
+    parent,
+    { id, isAdmin, deletedBy },
+    { RoomNoteModel }
+  ) => {
+    const note = await RoomNoteModel.findById(id);
+
+    if (note.createdBy !== deletedBy && !isAdmin)
+      return {
+        success: false,
+        message: "You dont have authorization to delete the note",
+      };
+
+    const success = await RoomNoteModel.findByIdAndDelete(id);
+    if (success) return { success: true, message: "Note deleted" };
+    return { success: false, message: "An error occured" };
   },
 };
 

@@ -10,6 +10,7 @@ const TaskSection = {
       createdAt: task.createdAt,
       dueDate: task.dueDate,
       priority: task.priority,
+      estimatedTime: task.estimatedTime,
       updatedAt: task.updatedAt,
     }));
   },

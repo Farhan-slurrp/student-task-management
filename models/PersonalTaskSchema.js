@@ -8,6 +8,7 @@ const personalTaskSchema = new mongoose.Schema({
   createdAt: { type: Date, required: true },
   dueDate: { type: Date, required: false },
   priority: { type: String, required: true },
+  estimatedTime: { type: Number, required: false },
   updatedAt: { type: Date, required: false },
 });
 

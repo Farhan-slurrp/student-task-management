@@ -20,6 +20,7 @@ exports.typeDefs = gql`
     createdAt: Date
     dueDate: Date
     priority: String
+    estimatedTime: Float
     updatedAt: Date
   }
 
@@ -134,6 +135,7 @@ exports.typeDefs = gql`
       createdAt: Date
       dueDate: Date
       priority: String
+      estimatedTime: Float
     ): Boolean
     editPersonalTask(
       id: ID!
@@ -144,6 +146,7 @@ exports.typeDefs = gql`
       updatedAt: Date
       dueDate: Date
       priority: String
+      estimatedTime: Float
     ): Boolean
     deletePersonalTask(id: ID!): Boolean
     addNoteSection(title: String!, userEmail: String!): Boolean
@@ -197,5 +200,15 @@ exports.typeDefs = gql`
       createdBy: String
       roomId: ID!
     ): Boolean
+    editRoomNote(
+      id: ID!
+      title: String!
+      content: String!
+      isAdmin: Boolean
+      updatedAt: Date
+      updatedBy: String
+      roomId: ID!
+    ): SuccessMessage
+    deleteRoomNote(id: ID!, isAdmin: Boolean, deletedBy: String): SuccessMessage
   }
 `;
