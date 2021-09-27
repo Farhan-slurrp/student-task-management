@@ -185,6 +185,7 @@ exports.typeDefs = gql`
       status: String
       progress: Float
       roomId: ID!
+      createdAt: Date
       updatedAt: Date
       workingOn: String
       completedBy: String
