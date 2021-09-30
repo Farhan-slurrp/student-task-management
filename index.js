@@ -58,6 +58,6 @@ const server = new ApolloServer({
 });
 
 // The `listen` method launches a web server.
-server.listen({ port: 8001 }).then(({ url }) => {
+server.listen({ port: process.env.PORT || 8001 }).then(({ url }) => {
   console.log(`Server ready at ${url}🚀`);
 });
