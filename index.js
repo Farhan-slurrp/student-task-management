@@ -5,6 +5,7 @@ const { makeExecutableSchema } = require("@graphql-tools/schema");
 const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const pubsub = require("./utils/pubsub");
 const { typeDefs } = require("./schema");
 const Query = require("./resolvers/Query");
@@ -42,6 +43,7 @@ db.once("open", () => {
 
 (async function () {
   const app = express();
+  app.use(cors);
 
   const httpServer = createServer(app);
 
