@@ -374,7 +374,7 @@ const Mutation = {
       dueDate,
       priority,
     },
-    { RoomTaskModel, pubsub }
+    { RoomTaskModel }
   ) => {
     const newTask = new RoomTaskModel({
       content,
@@ -388,24 +388,8 @@ const Mutation = {
     });
 
     const success = await newTask.save();
-    if (!success) return false;
-    pubsub.publish("ROOM_TASK_CREATED", {
-      roomTaskCreated: {
-        id: success._id,
-        content,
-        status,
-        progress,
-        roomId,
-        createdAt,
-        createdBy,
-        workingOn: success.workingOn,
-        completedBy: success.completedBy,
-        dueDate,
-        priority,
-        updatedAt: success.updatedAt,
-      },
-    });
-    return true;
+    if (success) return true;
+    return false;
   },
 
   // delete room task
