@@ -212,4 +212,8 @@ exports.typeDefs = gql`
     ): SuccessMessage
     deleteRoomNote(id: ID!, isAdmin: Boolean, deletedBy: String): SuccessMessage
   }
+
+  type Subscription {
+    roomTaskCreated(roomId: ID): RoomTask
+  }
 `;
