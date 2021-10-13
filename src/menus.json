@@ -1,0 +1,22 @@
+[
+  {
+    "title": "✍ Create Task Section",
+    "type": "addTaskSection"
+  },
+  {
+    "title": "🏢 Create Room",
+    "type": "rooms"
+  },
+  {
+    "title": "📝 Create Note Section",
+    "type": "addNoteSection"
+  },
+  {
+    "title": "🏢 Join Room",
+    "link": "/rooms/join"
+  },
+  {
+    "title": "📅 View Calendar",
+    "link": "/calendar"
+  }
+]
