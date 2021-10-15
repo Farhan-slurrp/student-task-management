@@ -127,7 +127,7 @@ const TaskSection: React.FunctionComponent<TaskSectionProps> = () => {
 
       <div className="flex flex-col h-auto gap-6 px-12 pt-12 pb-6">
         <h1 className="text-4xl font-bold text-gray-800">All Tasks</h1>
-        <p className="w-1/2 text-justify">
+        <p className="w-full text-justify md:w-1/2">
           Use this board to track your personal tasks.
           <br />
           Click
@@ -212,23 +212,35 @@ const TaskSection: React.FunctionComponent<TaskSectionProps> = () => {
             </div>
           </div>
         )}
-        <button className="flex justify-start pt-6 cursor-default">
+        <button className="flex items-center justify-between pt-6 cursor-default">
           <p
             className="p-2 font-semibold text-white align-middle bg-blue-500 rounded-md shadow-sm cursor-pointer"
             onClick={handleModalOpen}
           >
             <AddIcon fontSize="small" /> New Task
           </p>
+          <div className="flex border border-gray-700 rounded-md md:hidden">
+            <a href="#0" className="p-2 border-r border-gray-700">
+              TO DO
+            </a>
+            <a href="#1" className="p-2 border-r border-gray-700">
+              IN PROGRESS
+            </a>
+            <a href="#2" className="p-2">
+              DONE
+            </a>
+          </div>
         </button>
         <ModalComp
           open={openModal}
           type="addNewTask"
           handleClose={handleModalClose}
         />
-        <div className="grid items-stretch grid-cols-3 gap-2">
+        <div className="flex flex-col items-stretch grid-cols-3 gap-6 md:grid md:gap-2">
           {columns.map((column, idx) => (
             <div className="flex flex-col" key={idx}>
               <div
+                id={idx.toString()}
                 className={`border-b border-gray-400 flex items-center justify-between py-2 px-4 font-semibold text-gray-700 bg-gray-100`}
               >
                 <h2>{column.title}</h2>

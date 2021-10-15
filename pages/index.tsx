@@ -52,28 +52,33 @@ export default function Home() {
       </Head>
 
       <main className="h-full">
-        <Image
-          src="/banner.jpg"
-          width={200}
-          height={40}
-          sizes="100vw"
-          layout="responsive"
-          className="object-cover"
-          placeholder="blur"
-          blurDataURL="https://www.ucyp.edu.my/wp-content/uploads/2020/11/DJI_0004-scaled.jpg"
-        />
-        <div className="z-50 flex flex-col px-24">
+        <div className="hidden md:block">
+          <Image
+            src="/banner.jpg"
+            width={200}
+            height={40}
+            sizes="100vw"
+            layout="responsive"
+            className="object-cover"
+            placeholder="blur"
+            blurDataURL="https://www.ucyp.edu.my/wp-content/uploads/2020/11/DJI_0004-scaled.jpg"
+          />
+        </div>
+        <div className="z-50 flex flex-col px-12 md:px-24">
           <ModalComp open={open} type={type} handleClose={handleClose} />
-          <h1 className="absolute z-50 text-6xl -mt-14">🏡</h1>
-          <h1 className="pt-10 text-4xl font-semibold">
+          <h1 className="z-20 hidden text-3xl md:absolute md:block md:text-6xl -mt-14">
+            🏡
+          </h1>
+          <div className="block p-4 text-6xl text-center md:hidden">🏡</div>
+          <h1 className="pt-10 text-3xl font-semibold md:text-4xl">
             Welcome {user.displayName.split(" ")[0]}!
           </h1>
-          <p className="pt-4 text-base font-medium text-gray-700">
+          <p className="pt-4 text-base font-medium text-justify text-gray-700">
             This is your homepage, your starting point to the next destination.{" "}
             <br />
             You can choose one of the options below to get started.
           </p>
-          <div className="grid grid-cols-2 gap-4 pt-12 pr-24">
+          <div className="flex flex-col grid-cols-2 gap-4 pt-12 pr-24 md:grid">
             {menus.map((menu) =>
               menu.link ? (
                 <Link href={menu.link} key={menu.title}>

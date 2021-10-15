@@ -7,7 +7,7 @@ const Loading: React.FunctionComponent<LoadingProps> = () => {
     <div className="grid w-screen h-screen place-items-center">
       <div className="flex flex-col items-center gap-2">
         <CircularProgress />
-        <p className="text-2xl">Loading</p>
+        <p className="text-xl md:text-2xl">Loading</p>
       </div>
     </div>
   );

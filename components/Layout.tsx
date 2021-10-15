@@ -13,6 +13,7 @@ export interface LayoutProps {}
 const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
   const { activeTask, setActiveTask } = useAppStore();
   const { updatePersonalTask } = useTaskStore();
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState<boolean>(false);
   const router = useRouter();
 
   React.useEffect(() => {
@@ -42,16 +43,23 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
   }, [activeTask]);
 
   const getSidebar = () => {
-    if (router.route.includes("/rooms/[room-id]")) return <RoomSidebar />;
-    return <Sidebar />;
+    if (router.route.includes("/rooms/[room-id]"))
+      return <RoomSidebar payload={{ isSidebarOpen, setIsSidebarOpen }} />;
+    return <Sidebar payload={{ isSidebarOpen, setIsSidebarOpen }} />;
   };
 
   return (
     <div className="flex items-stretch w-auto h-auto font-opensans">
-      {getSidebar()}
+      <div
+        className={`${
+          isSidebarOpen ? "absolute w-3/4 h-full" : "hidden"
+        } md:w-1/4 md:flex`}
+      >
+        {getSidebar()}
+      </div>
       <div className="flex flex-col w-full">
         <NotificationContainer />
-        <Navbar />
+        <Navbar payload={{ isSidebarOpen, setIsSidebarOpen }} />
         {children}
       </div>
     </div>

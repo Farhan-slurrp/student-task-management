@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../firebase/clientApp";
 import Accordion from "../components/Accordion";
@@ -6,15 +6,34 @@ import AccordionNoExpand from "./AccordionNoExpand";
 import photoURL from "../src/profileImagePlaceholder";
 import Link from "next/link";
 import { useUserStore } from "../stores/User/UserContext";
+import CloseIcon from "@material-ui/icons/Close";
+import { useRouter } from "next/router";
 
-export interface SidebarProps {}
+export interface SidebarProps {
+  payload: {
+    isSidebarOpen: boolean;
+    setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
+  };
+}
 
-const Sidebar: React.FunctionComponent<SidebarProps> = () => {
+const Sidebar: React.FunctionComponent<SidebarProps> = ({ payload }) => {
   const { userData } = useUserStore();
   const [user, loading, error] = useAuthState(firebase.auth());
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await firebase.auth().signOut();
+    return router.replace("/login");
+  };
 
   return (
-    <div className="sticky top-0 flex flex-col items-center w-1/4 h-screen gap-4 py-8 overflow-y-auto bg-gray-800 shadow-md">
+    <div className="sticky top-0 z-50 flex flex-col items-center w-full h-full gap-4 py-8 overflow-y-auto bg-gray-800 shadow-md">
+      <div
+        className="flex justify-end w-full px-4 py-2 -mt-6 text-white md:hidden"
+        onClick={() => payload.setIsSidebarOpen(!payload.isSidebarOpen)}
+      >
+        <CloseIcon />
+      </div>
       <Link href="/">
         <img
           src={user.photoURL ? user.photoURL : photoURL}
@@ -24,7 +43,7 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
         />
       </Link>
       <div className="grid pt-2 overflow-hidden place-items-center">
-        <h2 className="text-xl text-white font-lg">{user.displayName}</h2>
+        <h2 className="text-lg text-white font-lg">{user.displayName}</h2>
         <h3 className="text-gray-300">{user.email}</h3>
       </div>
       <div className="flex flex-col w-full mt-8">
@@ -59,6 +78,14 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
         />
         <AccordionNoExpand link={`/calendar`} title="Calendar" />
         <AccordionNoExpand link={`/stats`} title="Stats" />
+      </div>
+      <div className="flex flex-col py-12 md:hidden">
+        <button
+          onClick={handleSignOut}
+          className="px-4 py-1.5 font-semibold text-white bg-red-500 border border-red-500 rounded-md align-center"
+        >
+          Logout
+        </button>
       </div>
     </div>
   );

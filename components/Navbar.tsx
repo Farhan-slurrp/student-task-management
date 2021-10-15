@@ -3,10 +3,17 @@ import firebase from "../firebase/clientApp";
 import { useRouter } from "next/router";
 import { useUserStore } from "../stores/User/UserContext";
 import Link from "next/link";
+import MenuIcon from "@material-ui/icons/Menu";
+import { Dispatch, SetStateAction } from "react";
 
-export interface NavbarProps {}
+export interface NavbarProps {
+  payload: {
+    isSidebarOpen: boolean;
+    setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
+  };
+}
 
-const Navbar: React.FunctionComponent<NavbarProps> = () => {
+const Navbar: React.FunctionComponent<NavbarProps> = ({ payload }) => {
   const [user, loading, error] = useAuthState(firebase.auth());
   const { userData } = useUserStore();
   const router = useRouter();
@@ -58,9 +65,17 @@ const Navbar: React.FunctionComponent<NavbarProps> = () => {
   };
 
   return (
-    <div className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-8 bg-white shadow-md">
-      <h1 className="text-xl font-semibold font-poppins">{getNavTitle()}</h1>
-      <div className="flex items-center gap-4">
+    <div className="sticky top-0 z-20 flex items-center justify-between w-full h-16 px-8 bg-white shadow-md">
+      <div
+        className="flex md:hidden"
+        onClick={() => payload.setIsSidebarOpen(!payload.isSidebarOpen)}
+      >
+        <MenuIcon />
+      </div>
+      <h1 className="text-lg font-semibold md:text-xl font-poppins">
+        {getNavTitle()}
+      </h1>
+      <div className="items-center hidden gap-4 md:flex">
         {router.route.includes("/rooms/[room-id]") && (
           <Link href="/">
             <button className="px-4 py-1.5 font-semibold text-gray-900 border border-gray-700 rounded-md hover:text-white hover:bg-gray-700 align-center">

@@ -53,13 +53,13 @@ const Login: React.FunctionComponent<LoginProps> = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className="flex flex-col-reverse w-screen h-auto grid-cols-2 overflow-y-hidden bg-gray-100 lg:h-screen md:grid">
+      <div className="flex flex-col-reverse justify-center w-screen h-screen grid-cols-2 overflow-y-hidden bg-gray-100 md:grid">
         <div className="flex flex-col items-start justify-center w-full h-full gap-28 lg:pl-12 py-14">
           <div className="flex flex-col gap-y-4">
-            <h1 className="px-6 text-4xl font-bold text-gray-800 font-poppins">
+            <h1 className="px-6 text-2xl font-bold text-gray-800 md:text-4xl font-poppins">
               Student Task Management
             </h1>
-            <p className="px-6 text-2xl font-medium text-justify text-gray-500 font-poppins">
+            <p className="px-6 text-xl font-medium text-justify text-gray-500 md:text-2xl font-poppins">
               a web app to
               <span className="text-gray-800">
                 {" "}
