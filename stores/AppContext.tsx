@@ -16,6 +16,7 @@ export const useAppStore = () => React.useContext(AppStore);
 
 export const AppStoreProvider = ({ children }) => {
   const [user, loading, error] = useAuthState(firebase.auth());
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState<boolean>(false);
   const [activeTask, setActiveTask] = useLocalStorage<any | null>(
     "activeTask",
     null
@@ -47,7 +48,15 @@ export const AppStoreProvider = ({ children }) => {
 
   return (
     <AppStore.Provider
-      value={{ refreshData, user, getTaskType, activeTask, setActiveTask }}
+      value={{
+        refreshData,
+        user,
+        getTaskType,
+        activeTask,
+        setActiveTask,
+        isSidebarOpen,
+        setIsSidebarOpen,
+      }}
     >
       <UserStoreProvider>
         <TaskStoreProvider>

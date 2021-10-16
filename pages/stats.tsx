@@ -287,34 +287,26 @@ export default function Stats({}: StatsProps): ReactElement {
           </p>
         </div>
         <div className="flex flex-wrap justify-center w-full p-8 gap-x-20 gap-y-12">
-          <div className="flex flex-col items-center w-2/5 gap-8">
-            <h2 className="text-2xl font-bold text-gray-700">
+          <div className="flex flex-col items-center w-full gap-8 md:w-2/5">
+            <h2 className="text-xl font-bold text-gray-700 md:text-2xl">
               Tasks Distribution (Status)
             </h2>
             <Pie data={tasksDistData} width={450} height={450} />
           </div>
-          <div className="flex flex-col items-center w-3/6 gap-8">
-            <h2 className="text-2xl font-bold text-gray-700">
+          <div className="flex flex-col items-center w-full gap-8 md:w-3/6">
+            <h2 className="text-xl font-bold text-gray-700 md:text-2xl">
               Tasks Distribution (Priority)
             </h2>
             <Bar data={tasksDataWithpriority} width={250} height={180} />
           </div>
-          <div className="flex justify-between w-full">
-            <div className="flex flex-col items-center w-3/6 gap-8">
-              <h2 className="text-2xl font-bold text-gray-700">
-                Completed Task (Weekly)
-              </h2>
-              <Line data={weeklyCompletedTaskData} width={250} height={180} />
-            </div>
-            <div className="flex flex-col items-center w-3/6 gap-8">
-              <h2 className="text-2xl font-bold text-gray-700">
-                Completed Task (Monthly)
-              </h2>
-              <Line data={monthlyCompletedTaskData} width={250} height={180} />
-            </div>
+          <div className="flex flex-col items-center w-full gap-8 md:w-3/6">
+            <h2 className="text-xl font-bold text-gray-700 md:text-2xl">
+              Completed Task (Weekly)
+            </h2>
+            <Line data={weeklyCompletedTaskData} width={250} height={180} />
           </div>
-          <div className="flex flex-col items-center w-2/5 gap-8">
-            <h2 className="text-2xl font-bold text-gray-700">
+          <div className="flex flex-col items-center w-full gap-8 md:w-2/5">
+            <h2 className="text-xl font-bold text-gray-700 md:text-2xl">
               Current Progress
             </h2>
             {totalProgress ? (

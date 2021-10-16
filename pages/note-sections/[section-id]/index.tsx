@@ -43,9 +43,9 @@ export default function NoteSection({}: NoteSectionProps): ReactElement {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className="flex flex-col h-auto gap-6 px-12 pt-12 pb-6">
+      <div className="flex flex-col h-auto gap-6 px-10 pt-12 pb-6 md:px-12">
         <h1 className="text-4xl font-bold text-gray-800">All Notes</h1>
-        <p className="w-1/2 text-justify">
+        <p className="w-full text-justify md:w-1/2">
           Create or Read your personal Notes here.
           <br />
           Click
@@ -72,16 +72,16 @@ export default function NoteSection({}: NoteSectionProps): ReactElement {
                 href={`/note-sections/${sectionId}/note/${note.id}`}
                 key={note.id}
               >
-                <div className="flex items-center justify-between p-3 border-b border-gray-300 cursor-pointer group hover:bg-gray-100">
-                  <p className="font-semibold">{note.title}</p>
-                  <div className="flex items-center gap-2">
-                    <p className="text-gray-500">
+                <div className="flex items-center p-3 border-b border-gray-300 cursor-pointer group hover:bg-gray-100">
+                  <div className="justify-between w-full">
+                    <p className="font-semibold">{note.title}</p>
+                    <p className="text-xs text-gray-500">
                       Created at:{" "}
                       {format(new Date(note.createdAt), "dd/MM/yyyy")}
                     </p>
-                    <div className="invisible group-hover:visible">
-                      <NoteMenu id={note.id} type="personal" />
-                    </div>
+                  </div>
+                  <div className="invisible group-hover:visible">
+                    <NoteMenu id={note.id} type="personal" />
                   </div>
                 </div>
               </Link>

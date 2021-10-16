@@ -4,18 +4,14 @@ import { useRouter } from "next/router";
 import { useUserStore } from "../stores/User/UserContext";
 import Link from "next/link";
 import MenuIcon from "@material-ui/icons/Menu";
-import { Dispatch, SetStateAction } from "react";
+import { useAppStore } from "../stores/AppContext";
 
-export interface NavbarProps {
-  payload: {
-    isSidebarOpen: boolean;
-    setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
-  };
-}
+export interface NavbarProps {}
 
-const Navbar: React.FunctionComponent<NavbarProps> = ({ payload }) => {
+const Navbar: React.FunctionComponent<NavbarProps> = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
   const { userData } = useUserStore();
+  const { isSidebarOpen, setIsSidebarOpen } = useAppStore();
   const router = useRouter();
 
   // trigger when logout button clicked
@@ -68,7 +64,7 @@ const Navbar: React.FunctionComponent<NavbarProps> = ({ payload }) => {
     <div className="sticky top-0 z-20 flex items-center justify-between w-full h-16 px-8 bg-white shadow-md">
       <div
         className="flex md:hidden"
-        onClick={() => payload.setIsSidebarOpen(!payload.isSidebarOpen)}
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
         <MenuIcon />
       </div>

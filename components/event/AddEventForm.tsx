@@ -88,7 +88,7 @@ const AddEventForm: React.FunctionComponent<AddEventFormProps> = () => {
                   margin="normal"
                   id="start-date"
                   label="Start Date"
-                  className="w-2/5"
+                  className="w-full md:w-2/5"
                   value={startDate}
                   onChange={(date: Date | null) => {
                     setStartDate(date);
@@ -105,7 +105,7 @@ const AddEventForm: React.FunctionComponent<AddEventFormProps> = () => {
                   margin="normal"
                   id="end-date"
                   label="End Date"
-                  className="w-2/5"
+                  className="w-full md:w-2/5"
                   value={endDate}
                   onChange={(date: Date | null) => setEndDate(date)}
                   KeyboardButtonProps={{
@@ -173,7 +173,7 @@ const AddEventForm: React.FunctionComponent<AddEventFormProps> = () => {
           <div className="flex justify-center w-full mt-12">
             <button
               type="submit"
-              className="w-1/5 px-3 py-2 font-semibold text-white bg-green-600 rounded-md align-center"
+              className="w-full px-3 py-2 font-semibold text-white bg-green-600 rounded-md md:w-1/5 align-center"
             >
               ADD EVENT
             </button>

@@ -76,7 +76,7 @@ const Calendar = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className="w-full p-8">
+      <div className="w-full p-4 md:p-8">
         <AddEventForm />
         {currentEvent && (
           <EventModal

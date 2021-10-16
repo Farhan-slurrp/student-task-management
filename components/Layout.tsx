@@ -11,9 +11,8 @@ import "react-notifications/lib/notifications.css";
 export interface LayoutProps {}
 
 const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
-  const { activeTask, setActiveTask } = useAppStore();
+  const { activeTask, setActiveTask, isSidebarOpen } = useAppStore();
   const { updatePersonalTask } = useTaskStore();
-  const [isSidebarOpen, setIsSidebarOpen] = React.useState<boolean>(false);
   const router = useRouter();
 
   React.useEffect(() => {
@@ -43,13 +42,16 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
   }, [activeTask]);
 
   const getSidebar = () => {
-    if (router.route.includes("/rooms/[room-id]"))
-      return <RoomSidebar payload={{ isSidebarOpen, setIsSidebarOpen }} />;
-    return <Sidebar payload={{ isSidebarOpen, setIsSidebarOpen }} />;
+    if (router.route.includes("/rooms/[room-id]")) return <RoomSidebar />;
+    return <Sidebar />;
   };
 
   return (
-    <div className="flex items-stretch w-auto h-auto font-opensans">
+    <div
+      className={`flex items-stretch h-auto w-auto font-opensans ${
+        isSidebarOpen ? "overflow-y-hidden" : ""
+      }`}
+    >
       <div
         className={`${
           isSidebarOpen ? "absolute w-3/4 h-full" : "hidden"
@@ -57,9 +59,9 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
       >
         {getSidebar()}
       </div>
-      <div className="flex flex-col w-full">
+      <div className={`flex flex-col w-full`}>
         <NotificationContainer />
-        <Navbar payload={{ isSidebarOpen, setIsSidebarOpen }} />
+        <Navbar />
         {children}
       </div>
     </div>

@@ -8,21 +8,16 @@ import Link from "next/link";
 import { useUserStore } from "../../stores/User/UserContext";
 import { useRouter } from "next/router";
 import CloseIcon from "@material-ui/icons/Close";
+import { useAppStore } from "../../stores/AppContext";
 
-export interface RoomSidebarProps {
-  payload: {
-    isSidebarOpen: boolean;
-    setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
-  };
-}
+export interface RoomSidebarProps {}
 
-const RoomSidebar: React.FunctionComponent<RoomSidebarProps> = ({
-  payload,
-}) => {
+const RoomSidebar: React.FunctionComponent<RoomSidebarProps> = () => {
   const { userData } = useUserStore();
   const [user, loading, error] = useAuthState(firebase.auth());
   const router = useRouter();
   const linkValue = `stm/joinroom/${router.query["room-id"]}`;
+  const { isSidebarOpen, setIsSidebarOpen } = useAppStore();
 
   const handleSignOut = async () => {
     await firebase.auth().signOut();
@@ -38,7 +33,7 @@ const RoomSidebar: React.FunctionComponent<RoomSidebarProps> = ({
     <div className="sticky top-0 z-50 flex flex-col items-center w-full h-screen gap-4 py-8 overflow-y-auto bg-gray-800 shadow-md">
       <div
         className="flex justify-end w-full px-4 py-2 -mt-6 text-white md:hidden"
-        onClick={() => payload.setIsSidebarOpen(!payload.isSidebarOpen)}
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
         <CloseIcon />
       </div>
