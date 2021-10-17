@@ -148,7 +148,7 @@ const TaskSection: React.FunctionComponent<TaskSectionProps> = () => {
             </h3>
             <div
               id={recommendedTask.id}
-              className="w-3/5 px-4 py-2 mt-3 border border-blue-300 rounded-md bg-blue-50 group"
+              className="w-full px-4 py-2 mt-3 border border-blue-300 rounded-md md:w-3/5 bg-blue-50 group"
             >
               <div className="invisible group-hover:visible">
                 <TaskMenu
@@ -193,7 +193,7 @@ const TaskSection: React.FunctionComponent<TaskSectionProps> = () => {
           </div>
         )}
         {activeTask && (
-          <div className="w-3/5 border-b-4 border-gray-400 rounded-md ">
+          <div className="w-full border-b-4 border-gray-400 rounded-md md:w-3/5 ">
             <div className="flex items-center gap-2 p-2 font-semibold text-green-800 bg-green-200 border-t border-l border-r border-green-400 rounded-t-md">
               <WorkIcon />
               <p>Actively Working...</p>

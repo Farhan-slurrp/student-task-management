@@ -109,7 +109,7 @@ function ChatRoom({}: Props): ReactElement {
                     }`}
                   >
                     <div
-                      className={`w-1/2 p-2 rounded-md ${
+                      className={`w-full md:w-1/2 p-2 rounded-md ${
                         user.email == chat.createdBy.email
                           ? "bg-yellow-200"
                           : "bg-white"
@@ -145,7 +145,7 @@ function ChatRoom({}: Props): ReactElement {
             })}
           <div ref={messagesEndRef} className="h-20"></div>
         </div>
-        <div className="fixed bottom-0 w-4/5 h-auto px-4 py-6 bg-white border-t border-gray-400 shadow-lg">
+        <div className="fixed bottom-0 w-full h-auto px-4 py-6 bg-white border-t border-gray-400 shadow-lg md:w-4/5">
           <div className="flex justify-between gap-4">
             <input
               type="text"

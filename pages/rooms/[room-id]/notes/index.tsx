@@ -49,9 +49,9 @@ export default function RoomNotes({}: Props): ReactElement {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className="flex flex-col h-auto gap-6 px-12 pt-12 pb-6">
+      <div className="flex flex-col h-auto gap-6 px-10 pt-12 pb-6 md:px-12">
         <h1 className="text-4xl font-bold text-gray-800">All Notes</h1>
-        <p className="w-1/2 text-justify">
+        <p className="w-full text-justify md:w-1/2">
           Create or Read room notes here.
           <br />
           Click
@@ -76,38 +76,40 @@ export default function RoomNotes({}: Props): ReactElement {
             {notesData.map((note) => (
               <Link href={`/rooms/${roomId}/note/${note.id}`} key={note.id}>
                 <div className="flex items-center justify-between p-3 border-b border-gray-300 cursor-pointer group hover:bg-gray-100">
-                  <p className="font-semibold">{note.title}</p>
-                  <div className="flex items-center gap-2">
-                    <Tooltip
-                      title={note.createdBy.email}
-                      className="cursor-pointer"
-                    >
-                      <img
-                        className="border border-white rounded-full"
-                        width="20"
-                        height="20"
-                        src={`${note.createdBy.profPict}`}
-                        alt="profPict"
-                      />
-                    </Tooltip>
-                    <p className="text-gray-500">
-                      Created at:{" "}
-                      {format(new Date(note.createdAt), "dd/MM/yyyy")}
-                    </p>
-                    <div
-                      className={`invisible ${
-                        note.createdBy.email == userData.user.email ||
-                        isCurrentUserAdmin()
-                          ? "group-hover:visible"
-                          : ""
-                      }`}
-                    >
-                      <NoteMenu
-                        id={note.id}
-                        type="room"
-                        isAdmin={isCurrentUserAdmin()}
-                      />
+                  <div className="flex flex-col justify-between w-full gap-2 md:items-center md:flex-row">
+                    <p className="font-semibold">{note.title}</p>
+                    <div className="flex flex-row-reverse items-center justify-end gap-2 md:justify-start md:flex-row">
+                      <Tooltip
+                        title={note.createdBy.email}
+                        className="cursor-pointer"
+                      >
+                        <img
+                          className="border border-white rounded-full"
+                          width="20"
+                          height="20"
+                          src={`${note.createdBy.profPict}`}
+                          alt="profPict"
+                        />
+                      </Tooltip>
+                      <p className="text-gray-500">
+                        Created at:{" "}
+                        {format(new Date(note.createdAt), "dd/MM/yyyy")}
+                      </p>
                     </div>
+                  </div>
+                  <div
+                    className={`invisible ${
+                      note.createdBy.email == userData.user.email ||
+                      isCurrentUserAdmin()
+                        ? "group-hover:visible"
+                        : ""
+                    }`}
+                  >
+                    <NoteMenu
+                      id={note.id}
+                      type="room"
+                      isAdmin={isCurrentUserAdmin()}
+                    />
                   </div>
                 </div>
               </Link>
@@ -119,7 +121,7 @@ export default function RoomNotes({}: Props): ReactElement {
               fontSize="large"
               className="text-gray-700 transform scale-150"
             />
-            <p className="mt-4 text-base font-medium text-center text-gray-700">
+            <p className="mt-4 font-medium text-center text-gray-700 md:text-base">
               The room currently have no note. <br />
               Start to make one to helps other members.
             </p>

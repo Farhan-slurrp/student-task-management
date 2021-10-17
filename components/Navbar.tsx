@@ -61,7 +61,9 @@ const Navbar: React.FunctionComponent<NavbarProps> = () => {
   };
 
   return (
-    <div className="sticky top-0 z-20 flex items-center justify-between w-full h-16 px-8 bg-white shadow-md">
+    <div
+      className={`sticky top-0 z-20 flex items-center justify-between h-16 w-full px-4 md:px-8 bg-white shadow-md`}
+    >
       <div
         className="flex md:hidden"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}

@@ -48,13 +48,13 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
 
   return (
     <div
-      className={`flex items-stretch h-auto w-auto font-opensans ${
-        isSidebarOpen ? "overflow-y-hidden" : ""
+      className={`flex items-stretch w-auto font-opensans ${
+        isSidebarOpen ? "overflow-y-hidden h-screen" : "h-auto"
       }`}
     >
       <div
         className={`${
-          isSidebarOpen ? "absolute w-3/4 h-full" : "hidden"
+          isSidebarOpen ? "absolute w-full h-screen" : "hidden"
         } md:w-1/4 md:flex`}
       >
         {getSidebar()}

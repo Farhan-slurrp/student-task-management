@@ -86,10 +86,10 @@ export default function Home() {
           </h1>
           <p className="pt-4 text-base font-medium text-justify text-gray-700">
             This is your homepage, your starting point to the next destination.{" "}
-            <br />
+            <br className="hidden md:block" />
             You can choose one of the options below to get started.
           </p>
-          <div className="flex flex-col grid-cols-2 gap-4 pt-12 pr-24 md:grid">
+          <div className="flex flex-col grid-cols-2 gap-4 pt-12 md:pr-24 md:grid">
             {menus.map((menu) =>
               menu.link ? (
                 <Link href={menu.link} key={menu.title}>

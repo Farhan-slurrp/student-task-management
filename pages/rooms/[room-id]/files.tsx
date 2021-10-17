@@ -83,9 +83,9 @@ function RoomFile({}: Props): ReactElement {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className="flex flex-col h-auto gap-6 px-12 pt-12 pb-6">
+      <div className="flex flex-col h-auto gap-6 px-10 pt-12 pb-6 md:px-12">
         <h1 className="text-4xl font-bold text-gray-800">All Files</h1>
-        <p className="w-1/2 text-justify">
+        <p className="w-full text-justify md:w-1/2">
           This page list all files that related to the room project.
           <br />
           Click
@@ -135,7 +135,7 @@ function RoomFile({}: Props): ReactElement {
               fontSize="large"
               className="text-gray-700 transform scale-150"
             />
-            <p className="mt-4 text-base font-medium text-center text-gray-700">
+            <p className="mt-4 font-medium text-center text-gray-700 md:text-base">
               The room currently have no files. <br />
               Start to upload your project files.
             </p>

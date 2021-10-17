@@ -65,7 +65,7 @@ function CreateNote({}: CreateNoteProps): ReactElement {
             onChange={(value) => setContent(value)}
           />
           <div className="flex justify-center">
-            <button className="w-1/3 py-2 mt-8 text-base font-semibold text-white bg-green-500 rounded-md">
+            <button className="w-full py-2 mt-8 text-base font-semibold text-white bg-green-500 rounded-md md:w-1/3">
               Save Note
             </button>
           </div>

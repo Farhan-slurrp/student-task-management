@@ -144,9 +144,9 @@ export default function RoomPage({ params }: RoomProps): ReactElement {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className="flex flex-col h-auto gap-6 px-12 pt-12 pb-6">
+      <div className="flex flex-col h-auto gap-6 px-10 pt-12 pb-6 md:px-12">
         <h1 className="text-4xl font-bold text-gray-800">All Tasks</h1>
-        <p className="w-1/2 text-justify">
+        <p className="w-full text-justify md:w-1/2">
           Use this board to track the group tasks.
           <br />
           Click
@@ -158,7 +158,7 @@ export default function RoomPage({ params }: RoomProps): ReactElement {
           <br />
           Click menu icon in an existing task to update or edit task info.
         </p>
-        <button className="flex justify-start pt-6 cursor-default">
+        <button className="flex flex-col gap-6 pt-6 cursor-default">
           <p
             className="p-2 font-semibold text-white align-middle bg-blue-500 rounded-md shadow-sm cursor-pointer"
             onClick={() => {
@@ -167,15 +167,26 @@ export default function RoomPage({ params }: RoomProps): ReactElement {
           >
             <AddIcon fontSize="small" /> New Task
           </p>
+          <div className="flex border border-gray-700 rounded-md md:hidden">
+            <a href="#0" className="p-2 border-r border-gray-700">
+              TO DO
+            </a>
+            <a href="#1" className="p-2 border-r border-gray-700">
+              IN PROGRESS
+            </a>
+            <a href="#2" className="p-2">
+              DONE
+            </a>
+          </div>
         </button>
         <ModalComp
           open={openModal}
           type="addRoomTask"
           handleClose={handleModalClose}
         />
-        <div className="grid items-stretch grid-cols-3 gap-2">
+        <div className="flex flex-col items-stretch grid-cols-3 gap-6 md:grid md:gap-2">
           {columns.map((column, idx) => (
-            <div className="flex flex-col" key={idx}>
+            <div className="flex flex-col" key={idx} id={idx.toString()}>
               <div
                 className={`border-b border-gray-400 flex items-center justify-between py-2 px-4 font-semibold text-gray-700 bg-gray-100`}
               >

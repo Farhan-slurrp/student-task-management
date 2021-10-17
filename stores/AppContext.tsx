@@ -33,6 +33,17 @@ export const AppStoreProvider = ({ children }) => {
     router.prefetch("/login");
   }, []);
 
+  React.useEffect(() => {
+    setIsSidebarOpen(false);
+  }, [router]);
+
+  React.useEffect(() => {
+    if (!user) {
+      // go to login page if not logged in
+      router.replace("/login");
+    }
+  }, [user]);
+
   if (loading) return <Loading />;
   if (error) return <div>Error</div>;
   if (!user) {
