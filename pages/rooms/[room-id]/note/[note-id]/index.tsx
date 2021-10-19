@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
 import Head from "next/head";
+import EditIcon from "@material-ui/icons/Edit";
 
 interface SingleRoomNoteProps {}
 
@@ -42,7 +43,7 @@ export default function SingleRoomNote({}: SingleRoomNoteProps): ReactElement {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className="mx-12 my-8">
+      <div className="mx-4 my-8 md:mx-12">
         <button
           className="px-4 py-2 font-semibold text-white bg-gray-700 rounded-sm"
           onClick={() => router.back()}
@@ -75,15 +76,26 @@ export default function SingleRoomNote({}: SingleRoomNoteProps): ReactElement {
             onClick={() =>
               router.replace(`/rooms/${roomId}/note/${noteId}/edit`)
             }
-            className="p-2 font-semibold text-white bg-green-500 border-b-2 border-green-700 rounded-md focus:bg-green-600"
+            className="hidden p-2 font-semibold text-white bg-green-500 rounded-md md:block focus:bg-green-600"
           >
             Edit Note
           </button>
         </div>
-        <div className="p-3 mt-16 border border-gray-300 rounded-md">
+        <div className="p-3 mt-16 border border-gray-200 rounded-md">
           <ReactMarkdown remarkPlugins={[gfm]}>
             {noteData.content}
           </ReactMarkdown>
+        </div>
+        <div className="block h-12 md:hidden"></div>
+        <div className="fixed flex justify-end md:hidden bottom-5 right-5">
+          <button
+            onClick={() =>
+              router.replace(`/rooms/${roomId}/note/${noteId}/edit`)
+            }
+            className="p-4 text-white bg-green-500 rounded-full"
+          >
+            <EditIcon />
+          </button>
         </div>
       </div>
     </>

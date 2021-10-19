@@ -12,7 +12,7 @@ export default function JoinRoom({}: JoinRoomProps): ReactElement {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const roomID: string = e.target["roomID"].value.split("/")[2];
+    const roomID: string = e.target["roomID"].value.split("/")[2] || "";
     const payload = await joinRoom(roomID);
     setReturnedData(payload.data.joinRoom);
     if (returnedData && returnedData.success === true) {
@@ -42,8 +42,8 @@ export default function JoinRoom({}: JoinRoomProps): ReactElement {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className="flex flex-col items-center justify-center gap-6 h-5/6 md:px-60">
-        <p className="text-base">
+      <div className="flex flex-col items-center justify-center gap-6 p-8 pt-24 h-5/6 md:py-0 lg:px-60">
+        <p className="text-base text-center">
           Enter invite link in the form below and click{" "}
           <span className="font-semibold">(Join)</span>
         </p>

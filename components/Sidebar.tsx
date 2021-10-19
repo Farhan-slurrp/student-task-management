@@ -33,15 +33,15 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
       </div>
       <Link href="/">
         <img
-          src={user.photoURL ? user.photoURL : photoURL}
+          src={user?.photoURL ? user.photoURL : photoURL}
           alt="profile"
           sizes="1rem"
           className="border-2 border-gray-300 rounded-full cursor-pointer"
         />
       </Link>
       <div className="grid pt-2 overflow-hidden place-items-center">
-        <h2 className="text-lg text-white font-lg">{user.displayName}</h2>
-        <h3 className="text-gray-300">{user.email}</h3>
+        <h2 className="text-lg text-white font-lg">{user?.displayName}</h2>
+        <h3 className="text-gray-300">{user?.email}</h3>
       </div>
       <div className="flex flex-col w-full mt-8">
         <Accordion

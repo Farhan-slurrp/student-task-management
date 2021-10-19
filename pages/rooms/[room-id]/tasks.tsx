@@ -144,7 +144,7 @@ export default function RoomPage({ params }: RoomProps): ReactElement {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className="flex flex-col h-auto gap-6 px-10 pt-12 pb-6 md:px-12">
+      <div className="flex flex-col h-auto gap-6 px-4 pt-12 pb-6 md:px-12">
         <h1 className="text-4xl font-bold text-gray-800">All Tasks</h1>
         <p className="w-full text-justify md:w-1/2">
           Use this board to track the group tasks.
@@ -160,10 +160,8 @@ export default function RoomPage({ params }: RoomProps): ReactElement {
         </p>
         <button className="flex flex-col gap-6 pt-6 cursor-default">
           <p
-            className="p-2 font-semibold text-white align-middle bg-blue-500 rounded-md shadow-sm cursor-pointer"
-            onClick={() => {
-              setModalOpen(true);
-            }}
+            className="hidden p-2 font-semibold text-white align-middle bg-blue-500 rounded-md shadow-sm cursor-pointer md:block"
+            onClick={handleModalOpen}
           >
             <AddIcon fontSize="small" /> New Task
           </p>
@@ -323,6 +321,15 @@ export default function RoomPage({ params }: RoomProps): ReactElement {
               </div>
             </div>
           ))}
+        </div>
+        <div className="block h-12 md:hidden"></div>
+        <div className="fixed flex justify-end md:hidden bottom-5 right-5">
+          <button
+            onClick={handleModalOpen}
+            className="p-4 text-white bg-blue-500 rounded-full"
+          >
+            <AddIcon />
+          </button>
         </div>
       </div>
     </>

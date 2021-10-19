@@ -182,7 +182,7 @@ const ModalComp: React.FunctionComponent<ModalCompProps> = ({
       case "addNoteSection":
       case "editNoteSection":
         return (
-          <div className="flex flex-col p-4">
+          <div className="flex flex-col md:p-4">
             {/* event name */}
             <div className="flex flex-col gap-2">
               <label htmlFor="title" className="text-gray-500 text-md">
@@ -191,7 +191,7 @@ const ModalComp: React.FunctionComponent<ModalCompProps> = ({
               <input
                 name="title"
                 type="text"
-                className="p-1 text-gray-800 border border-gray-400 rounded-md outline-none w-72 focus:border-blue-600"
+                className="w-full p-1 text-gray-800 border border-gray-400 rounded-md outline-none md:w-72 focus:border-blue-600"
                 required
                 autoComplete="off"
                 value={title}
@@ -207,7 +207,7 @@ const ModalComp: React.FunctionComponent<ModalCompProps> = ({
         return <EditTaskForm data={payload} handleClose={handleClose} />;
       case "rooms":
         return (
-          <div className="flex flex-col p-4">
+          <div className="flex flex-col md:p-4">
             {/* event name */}
             <div className="flex flex-col gap-2">
               <label htmlFor="title" className="text-gray-500 text-md">
@@ -216,7 +216,7 @@ const ModalComp: React.FunctionComponent<ModalCompProps> = ({
               <input
                 name="title"
                 type="text"
-                className="p-1 text-gray-800 border border-gray-400 rounded-md outline-none w-72 focus:border-blue-600"
+                className="w-full p-1 text-gray-800 border border-gray-400 rounded-md outline-none md:w-72 focus:border-blue-600"
                 required
                 autoComplete="off"
                 value={title}

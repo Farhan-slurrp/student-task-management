@@ -83,7 +83,7 @@ function RoomFile({}: Props): ReactElement {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className="flex flex-col h-auto gap-6 px-10 pt-12 pb-6 md:px-12">
+      <div className="flex flex-col h-auto gap-6 px-4 pt-12 pb-6 md:px-12">
         <h1 className="text-4xl font-bold text-gray-800">All Files</h1>
         <p className="w-full text-justify md:w-1/2">
           This page list all files that related to the room project.
@@ -97,7 +97,7 @@ function RoomFile({}: Props): ReactElement {
           <br />
           Click file name on the list to download the file.
         </p>
-        <button className="flex justify-start pt-6 cursor-default">
+        <button className="justify-start hidden pt-6 cursor-default md:flex">
           <p
             className="flex items-center p-2 font-semibold text-white align-middle bg-blue-500 rounded-md shadow-sm cursor-pointer"
             onClick={handleModalOpen}
@@ -141,6 +141,15 @@ function RoomFile({}: Props): ReactElement {
             </p>
           </div>
         )}
+      </div>
+      <div className="block h-12 md:hidden"></div>
+      <div className="fixed flex justify-end md:hidden bottom-5 right-5">
+        <button
+          onClick={handleModalOpen}
+          className="p-4 text-white bg-blue-500 rounded-full"
+        >
+          <AddIcon />
+        </button>
       </div>
     </>
   );

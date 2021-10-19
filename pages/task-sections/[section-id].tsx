@@ -126,7 +126,7 @@ const TaskSection: React.FunctionComponent<TaskSectionProps> = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className={`flex flex-col h-auto gap-6 px-10 md:px-12 pt-12 pb-6`}>
+      <div className={`flex flex-col h-auto gap-6 px-4 md:px-12 pt-12 pb-6`}>
         <h1 className="text-4xl font-bold text-gray-800">All Tasks</h1>
         <p className="w-full text-justify md:w-1/2">
           Use this board to track your personal tasks.
@@ -215,7 +215,7 @@ const TaskSection: React.FunctionComponent<TaskSectionProps> = () => {
         )}
         <button className="flex flex-col gap-6 pt-6 cursor-default">
           <p
-            className="p-2 font-semibold text-white align-middle bg-blue-500 rounded-md shadow-sm cursor-pointer"
+            className="hidden p-2 font-semibold text-white align-middle bg-blue-500 rounded-md shadow-sm cursor-pointer md:block"
             onClick={handleModalOpen}
           >
             <AddIcon fontSize="small" /> New Task
@@ -306,6 +306,15 @@ const TaskSection: React.FunctionComponent<TaskSectionProps> = () => {
               </div>
             </div>
           ))}
+        </div>
+        <div className="block h-12 md:hidden"></div>
+        <div className="fixed flex justify-end md:hidden bottom-5 right-5">
+          <button
+            onClick={handleModalOpen}
+            className="p-4 text-white bg-blue-500 rounded-full"
+          >
+            <AddIcon />
+          </button>
         </div>
       </div>
     </>

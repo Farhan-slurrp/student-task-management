@@ -43,7 +43,7 @@ export default function NoteSection({}: NoteSectionProps): ReactElement {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className="flex flex-col h-auto gap-6 px-10 pt-12 pb-6 md:px-12">
+      <div className="flex flex-col h-auto gap-6 px-4 pt-12 pb-6 md:px-12">
         <h1 className="text-4xl font-bold text-gray-800">All Notes</h1>
         <p className="w-full text-justify md:w-1/2">
           Create or Read your personal Notes here.
@@ -57,7 +57,7 @@ export default function NoteSection({}: NoteSectionProps): ReactElement {
           <br />
           Click menu icon in an existing note to update or edit note.
         </p>
-        <button className="flex justify-start pt-6 cursor-default">
+        <button className="justify-start hidden pt-6 cursor-default md:flex">
           <p
             onClick={() => router.push(`/note-sections/${sectionId}/create`)}
             className="p-2 font-semibold text-white align-middle bg-blue-500 rounded-md shadow-sm cursor-pointer"
@@ -101,6 +101,15 @@ export default function NoteSection({}: NoteSectionProps): ReactElement {
             </p>
           </div>
         )}
+        <div className="block h-12 md:hidden"></div>
+        <div className={`flex justify-end md:hidden bottom-5 right-5 fixed`}>
+          <button
+            onClick={() => router.push(`/note-sections/${sectionId}/create`)}
+            className="p-4 text-white bg-blue-500 rounded-full"
+          >
+            <AddIcon />
+          </button>
+        </div>
       </div>
     </>
   );

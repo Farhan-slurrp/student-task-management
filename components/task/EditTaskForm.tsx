@@ -112,7 +112,7 @@ const EditTaskForm: React.FunctionComponent<EditTaskFormProps> = ({
     <form
       id="editform"
       action="submit"
-      className="flex flex-col gap-6 w-96"
+      className="flex flex-col w-full gap-6 md:w-96"
       onSubmit={(e) => handleSubmit(e)}
     >
       <div className="flex flex-col gap-4 text-gray-600">
