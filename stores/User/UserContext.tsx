@@ -24,7 +24,7 @@ export const UserStoreProvider = ({ children }) => {
     refetch: refetchUser,
   } = useQuery(GET_USER, {
     variables: {
-      email: user ? user.email : "",
+      email: user?.email,
     },
     fetchPolicy: "cache-and-network",
   });
@@ -50,12 +50,12 @@ export const UserStoreProvider = ({ children }) => {
 
   // check if user already exist
   const checkUser = async () => {
-    if (userData) return true;
+    if (userData?.user) return true;
     return false;
   };
 
   // combine checkUser and saveUser
-  const createNewUser = async () => {
+  const createNewUser = async (user) => {
     const isUser = await checkUser();
     if (!userError) {
       if (!isUser) {

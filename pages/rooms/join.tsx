@@ -42,7 +42,7 @@ export default function JoinRoom({}: JoinRoomProps): ReactElement {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className="flex flex-col items-center justify-center gap-6 h-5/6 px-60">
+      <div className="flex flex-col items-center justify-center gap-6 h-5/6 md:px-60">
         <p className="text-base">
           Enter invite link in the form below and click{" "}
           <span className="font-semibold">(Join)</span>

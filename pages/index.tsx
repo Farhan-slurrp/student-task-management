@@ -16,19 +16,19 @@ export default function Home() {
   const [open, setOpen] = React.useState(false);
   const [type, setType] = React.useState("");
 
+  if (!user) {
+    // go to login page if not logged in
+    router.push("/login");
+    return <div></div>;
+  }
+
   // create new user if data doesnt exist in database
   React.useEffect(() => {
     // create function to handle promise
     if (user) {
-      createNewUser();
+      createNewUser(user);
     }
   }, [user]);
-
-  if (!user) {
-    // go to login page if not logged in
-    router.push("/");
-    return <div></div>;
-  }
 
   const handleOpen = (type) => {
     setType(type);
