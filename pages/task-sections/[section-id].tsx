@@ -311,7 +311,7 @@ const TaskSection: React.FunctionComponent<TaskSectionProps> = () => {
         <div className="fixed flex justify-end md:hidden bottom-5 right-5">
           <button
             onClick={handleModalOpen}
-            className="p-4 text-white bg-blue-500 rounded-full"
+            className="p-4 text-white bg-blue-500 rounded-full shadow-lg"
           >
             <AddIcon />
           </button>

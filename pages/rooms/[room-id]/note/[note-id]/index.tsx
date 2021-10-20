@@ -92,7 +92,7 @@ export default function SingleRoomNote({}: SingleRoomNoteProps): ReactElement {
             onClick={() =>
               router.replace(`/rooms/${roomId}/note/${noteId}/edit`)
             }
-            className="p-4 text-white bg-green-500 rounded-full"
+            className="p-4 text-white bg-green-500 rounded-full shadow-lg"
           >
             <EditIcon />
           </button>

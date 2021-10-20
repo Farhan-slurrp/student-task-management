@@ -131,7 +131,7 @@ export default function RoomNotes({}: Props): ReactElement {
         <div className={`flex justify-end md:hidden bottom-5 right-5 fixed`}>
           <button
             onClick={() => router.push(`/rooms/${roomId}/notes/create`)}
-            className="p-4 text-white bg-blue-500 rounded-full"
+            className="p-4 text-white bg-blue-500 rounded-full shadow-lg"
           >
             <AddIcon />
           </button>

@@ -94,7 +94,7 @@ export default function SingleNote({}: SingleNoteProps): ReactElement {
             onClick={() =>
               router.replace(`/note-sections/${sectionId}/edit/${noteId}`)
             }
-            className="p-4 text-white bg-green-500 rounded-full"
+            className="p-4 text-white bg-green-500 rounded-full shadow-lg"
           >
             <EditIcon />
           </button>
