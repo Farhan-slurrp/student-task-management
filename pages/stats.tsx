@@ -127,9 +127,9 @@ export default function Stats({}: StatsProps): ReactElement {
     datasets: [
       {
         data: [
-          tasks.filter((task) => task.status == "TO DO").length,
-          tasks.filter((task) => task.status == "IN PROGRESS").length,
-          tasks.filter((task) => task.status == "DONE").length,
+          tasks.filter((task) => task.status == "TO DO").length || 0,
+          tasks.filter((task) => task.status == "IN PROGRESS").length || 0,
+          tasks.filter((task) => task.status == "DONE").length || 0,
         ],
         backgroundColor: ["#FF6384", "#FFCE56", "#36A2EB"],
         hoverBackgroundColor: ["#FF6384", "#FFCE56", "#36A2EB"],
@@ -266,11 +266,15 @@ export default function Stats({}: StatsProps): ReactElement {
           <p>
             Overall Progress:{" "}
             <span className="ml-2 font-semibold">
-              {(
-                (tasks.map((task) => task.progress).reduce((a, b) => a + b, 0) /
-                  (tasks.length * 100)) *
-                100
-              ).toFixed(2)}
+              {tasks.length > 0
+                ? (
+                    (tasks
+                      .map((task) => task.progress)
+                      .reduce((a, b) => a + b, 0) /
+                      (tasks.length * 100)) *
+                    100
+                  ).toFixed(2)
+                : 0.0}
               %
             </span>
           </p>
@@ -287,34 +291,40 @@ export default function Stats({}: StatsProps): ReactElement {
           </p>
         </div>
         <div className="flex flex-wrap justify-center w-full p-8 gap-x-20 gap-y-12">
-          <div className="flex flex-col items-center w-full gap-8 md:w-2/5">
-            <h2 className="text-xl font-bold text-gray-700 md:text-2xl">
-              Tasks Distribution (Status)
-            </h2>
-            <Pie data={tasksDistData} width={450} height={450} />
-          </div>
-          <div className="flex flex-col items-center w-full gap-8 md:w-3/6">
-            <h2 className="text-xl font-bold text-gray-700 md:text-2xl">
-              Tasks Distribution (Priority)
-            </h2>
-            <Bar data={tasksDataWithpriority} width={250} height={180} />
-          </div>
-          <div className="flex flex-col items-center w-full gap-8 md:w-3/6">
-            <h2 className="text-xl font-bold text-gray-700 md:text-2xl">
-              Completed Task (Weekly)
-            </h2>
-            <Line data={weeklyCompletedTaskData} width={250} height={180} />
-          </div>
-          <div className="flex flex-col items-center w-full gap-8 md:w-2/5">
-            <h2 className="text-xl font-bold text-gray-700 md:text-2xl">
-              Current Progress
-            </h2>
-            {totalProgress ? (
-              <Doughnut data={currProgressData} width={450} height={450} />
-            ) : (
-              <p className="text-base text-gray-500">No task in progress</p>
-            )}
-          </div>
+          {tasks.length > 0 ? (
+            <>
+              <div className="flex flex-col items-center w-full gap-8 md:w-2/5">
+                <h2 className="text-xl font-bold text-gray-700 md:text-2xl">
+                  Tasks Distribution (Status)
+                </h2>
+                <Pie data={tasksDistData} width={450} height={450} />
+              </div>
+              <div className="flex flex-col items-center w-full gap-8 md:w-3/6">
+                <h2 className="text-xl font-bold text-gray-700 md:text-2xl">
+                  Tasks Distribution (Priority)
+                </h2>
+                <Bar data={tasksDataWithpriority} width={250} height={180} />
+              </div>
+              <div className="flex flex-col items-center w-full gap-8 md:w-3/6">
+                <h2 className="text-xl font-bold text-gray-700 md:text-2xl">
+                  Completed Task (Weekly)
+                </h2>
+                <Line data={weeklyCompletedTaskData} width={250} height={180} />
+              </div>
+              <div className="flex flex-col items-center w-full gap-8 md:w-2/5">
+                <h2 className="text-xl font-bold text-gray-700 md:text-2xl">
+                  Current Progress
+                </h2>
+                {totalProgress ? (
+                  <Doughnut data={currProgressData} width={450} height={450} />
+                ) : (
+                  <p className="text-base text-gray-500">No task in progress</p>
+                )}
+              </div>
+            </>
+          ) : (
+            <p className="text-base text-gray-500">You have no task</p>
+          )}
         </div>
       </div>
     </>

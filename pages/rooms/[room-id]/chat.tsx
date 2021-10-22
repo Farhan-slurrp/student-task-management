@@ -85,7 +85,7 @@ function ChatRoom({}: Props): ReactElement {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className="h-full bg-gray-200">
+      <div className="h-screen bg-gray-200 md:full">
         <div className="flex flex-col h-full gap-4 p-4 bg-gray-300">
           {chatData &&
             chatData.map((chat) => {
@@ -145,8 +145,8 @@ function ChatRoom({}: Props): ReactElement {
             })}
           <div ref={messagesEndRef} className="h-20"></div>
         </div>
-        <div className="fixed bottom-0 w-full h-auto px-4 py-6 bg-white border-t border-gray-400 shadow-lg md:w-4/5">
-          <div className="flex justify-between gap-4">
+        <div className="fixed bottom-0 w-full h-auto px-2 py-4 bg-white border-t border-gray-400 shadow-lg md:py-6 md:px-4 md:w-4/5">
+          <div className="flex justify-between gap-2 md:gap-4">
             <input
               type="text"
               value={inputMessage}
@@ -155,7 +155,7 @@ function ChatRoom({}: Props): ReactElement {
               className="w-full p-2 border border-gray-400 rounded-md outline-none"
             />
             <button
-              className="flex items-center gap-2 px-4 py-2 font-semibold text-white bg-blue-500 rounded-md"
+              className="flex items-center gap-2 px-2 py-2 font-semibold text-white bg-blue-500 rounded-md md:px-4"
               onClick={() => handleSend()}
             >
               <SendIcon fontSize={"small"} />
