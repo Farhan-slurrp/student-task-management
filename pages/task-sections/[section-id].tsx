@@ -273,7 +273,7 @@ const TaskSection: React.FunctionComponent<TaskSectionProps> = () => {
                           </div>
                         )}
                       </div>
-                      <div className="invisible group-hover:visible">
+                      <div className="visible md:invisible group-hover:visible">
                         <TaskMenu currentColumn={column.title} task={task} />
                       </div>
                     </div>

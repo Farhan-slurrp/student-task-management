@@ -134,7 +134,7 @@ const Accordion: React.FunctionComponent<AccordionProps> = ({
                     # {title === "Rooms" ? item.roomName : item.title}
                   </p>
 
-                  <div className="invisible group-hover:visible">
+                  <div className="visible md:invisible group-hover:visible">
                     <SidebarMenu
                       id={item.id}
                       title={item.title}

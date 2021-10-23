@@ -80,7 +80,7 @@ export default function NoteSection({}: NoteSectionProps): ReactElement {
                       {format(new Date(note.createdAt), "dd/MM/yyyy")}
                     </p>
                   </div>
-                  <div className="invisible group-hover:visible">
+                  <div className="visible md:invisible group-hover:visible">
                     <NoteMenu id={note.id} type="personal" />
                   </div>
                 </div>

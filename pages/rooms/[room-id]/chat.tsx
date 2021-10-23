@@ -85,7 +85,7 @@ function ChatRoom({}: Props): ReactElement {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className="h-screen bg-gray-200 md:full">
+      <div className="h-full bg-gray-200 min-h-4/4">
         <div className="flex flex-col h-full gap-4 p-4 bg-gray-300">
           {chatData &&
             chatData.map((chat) => {

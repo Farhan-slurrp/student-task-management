@@ -98,7 +98,7 @@ export default function RoomNotes({}: Props): ReactElement {
                     </div>
                   </div>
                   <div
-                    className={`invisible ${
+                    className={`visible md:invisible ${
                       note.createdBy.email == userData.user.email ||
                       isCurrentUserAdmin()
                         ? "group-hover:visible"

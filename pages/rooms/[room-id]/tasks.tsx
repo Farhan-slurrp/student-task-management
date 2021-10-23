@@ -218,7 +218,7 @@ export default function RoomPage({ params }: RoomProps): ReactElement {
                           </div>
                         )}
                       </div>
-                      <div className="invisible group-hover:visible">
+                      <div className="visible md:invisible group-hover:visible">
                         <TaskMenu
                           currentColumn={column.title}
                           task={{

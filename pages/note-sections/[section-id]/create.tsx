@@ -37,7 +37,7 @@ function CreateNote({}: CreateNoteProps): ReactElement {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className="mx-12 my-8">
+      <div className="mx-4 my-8 md:mx-12">
         <button
           className="px-4 py-2 font-semibold text-white bg-gray-700 rounded-sm"
           onClick={() => router.back()}
