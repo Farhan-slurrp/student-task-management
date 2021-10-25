@@ -72,7 +72,7 @@ const EventModal: React.FunctionComponent<EventModalProps> = ({
               onSubmit={(e) => handleSubmit(e)}
             >
               {/* form body */}
-              <div className="p-8 border border-gray-200 rounded-sm">
+              <div className="px-4 py-8 border border-gray-200 rounded-sm md:px-4">
                 {/* event name */}
                 <div className="flex flex-col gap-1">
                   <label htmlFor="title">Section Name:</label>
@@ -98,7 +98,7 @@ const EventModal: React.FunctionComponent<EventModalProps> = ({
                         margin="normal"
                         id="start-date"
                         label="Start Date"
-                        className="w-2/5"
+                        className="w-full md:w-2/5"
                         value={startDate}
                         onChange={(date: Date | null) => {
                           setStartDate(date);
@@ -115,7 +115,7 @@ const EventModal: React.FunctionComponent<EventModalProps> = ({
                         margin="normal"
                         id="end-date"
                         label="End Date"
-                        className="w-2/5"
+                        className="w-full md:w-2/5"
                         value={endDate}
                         onChange={(date: Date | null) => setEndDate(date)}
                         KeyboardButtonProps={{
@@ -154,7 +154,7 @@ const EventModal: React.FunctionComponent<EventModalProps> = ({
                           id="starttimepicker"
                           label="Start time"
                           value={startDate}
-                          className="w-2/5"
+                          className="w-full md:w-2/5"
                           onChange={(date: Date | null) => {
                             setStartDate(date);
                             if (date > endDate) setEndDate(date);
@@ -167,7 +167,7 @@ const EventModal: React.FunctionComponent<EventModalProps> = ({
                           margin="normal"
                           id="endtimepicker"
                           label="End time"
-                          className="w-2/5"
+                          className="w-full md:w-2/5"
                           value={endDate}
                           onChange={(date: Date | null) => setEndDate(date)}
                           KeyboardButtonProps={{
@@ -180,16 +180,16 @@ const EventModal: React.FunctionComponent<EventModalProps> = ({
                 )}
               </div>
               {/* buttons */}
-              <div className="flex justify-end w-full mt-4 gap-x-4">
+              <div className="flex flex-col justify-end w-full mt-4 md:flex-row gap-y-2 gap-x-4">
                 <button
                   type="submit"
-                  className="w-1/5 px-2 py-1 text-sm font-semibold text-white bg-green-600 rounded-md align-center"
+                  className="w-full px-2 py-1 text-sm font-semibold text-white bg-green-600 rounded-md md:w-1/5 align-center"
                 >
                   EDIT
                 </button>
                 <button
                   type="button"
-                  className="w-1/5 px-2 py-1 text-sm font-semibold text-white bg-red-600 rounded-md align-center"
+                  className="w-full px-2 py-1 text-sm font-semibold text-white bg-red-600 rounded-md md:w-1/5 align-center"
                   onClick={handleDelete}
                 >
                   DELETE

@@ -144,7 +144,7 @@ const AddEventForm: React.FunctionComponent<AddEventFormProps> = () => {
                     id="starttimepicker"
                     label="Start time"
                     value={startDate}
-                    className="w-2/5"
+                    className="w-full md:w-2/5"
                     onChange={(date: Date | null) => {
                       setStartDate(date);
                       if (date > endDate) setEndDate(date);
@@ -157,7 +157,7 @@ const AddEventForm: React.FunctionComponent<AddEventFormProps> = () => {
                     margin="normal"
                     id="endtimepicker"
                     label="End time"
-                    className="w-2/5"
+                    className="w-full md:w-2/5"
                     value={endDate}
                     onChange={(date: Date | null) => setEndDate(date)}
                     KeyboardButtonProps={{
