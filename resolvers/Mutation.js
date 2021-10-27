@@ -341,6 +341,34 @@ const Mutation = {
     }
   },
 
+  // join to room
+  addAdmin: async (parent, { roomID, userEmail }, { RoomModel }) => {
+    const newMember = { email: userEmail, isAdmin: true };
+    try {
+      const room = await RoomModel.findById(roomID);
+
+      const isExist = room.members.find((member) => member.email === userEmail);
+      if (!isExist)
+        return { success: false, message: "User is not room members" };
+
+      const success = await RoomModel.findByIdAndUpdate(roomID, {
+        $set: {
+          members: [
+            ...room.members.filter((member) => member.email != userEmail),
+            newMember,
+          ],
+        },
+      });
+      if (success)
+        return { success: true, message: "The user prmoted as admin" };
+    } catch (err) {
+      if (err.kind == "ObjectId") {
+        return { success: false, message: "Invalid room ID" };
+      }
+      return { success: false, message: "An error occured" };
+    }
+  },
+
   // leave to room
   leaveRoom: async (parent, { roomID, userEmail }, { RoomModel }) => {
     const room = await RoomModel.findById(roomID);
