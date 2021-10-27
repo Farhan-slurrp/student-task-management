@@ -17,7 +17,7 @@ const Navbar: React.FunctionComponent<NavbarProps> = () => {
   // trigger when logout button clicked
   const handleSignOut = async () => {
     await firebase.auth().signOut();
-    return router.replace("/login");
+    router.replace("/login");
   };
 
   const getNavTitle = () => {

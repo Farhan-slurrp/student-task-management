@@ -10,6 +10,8 @@ import Tooltip from "@material-ui/core/Tooltip";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import photoURL from "../src/profileImagePlaceholder";
+import { MemberMenu } from "./room/MemberMenu";
+import { useAppStore } from "../stores/AppContext";
 
 export interface AccordionProps {
   title: String;
@@ -26,7 +28,9 @@ const Accordion: React.FunctionComponent<AccordionProps> = ({
 }) => {
   const [isActive, setIsActive] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+  const { user } = useAppStore();
   const router = useRouter();
+  const currentUserEmail = user.email;
 
   const isCurrentPage = () => {
     switch (title) {
@@ -51,6 +55,11 @@ const Accordion: React.FunctionComponent<AccordionProps> = ({
       default:
         return false;
     }
+  };
+
+  const isCurrentUserAdmin = () => {
+    return content.find((member) => member.userData.email === currentUserEmail)
+      .isAdmin;
   };
 
   const getRedirectURL = (id) => {
@@ -153,22 +162,36 @@ const Accordion: React.FunctionComponent<AccordionProps> = ({
         <div className="flex flex-col gap-2 p-2">
           {content ? (
             content.map((user) => (
-              <div className="flex items-center gap-3">
-                <img
-                  src={
-                    user.userData.profPict ? user.userData.profPict : photoURL
-                  }
-                  alt="profile"
-                  width="23"
-                  height="23"
-                  className="border border-gray-300 rounded-full"
-                />
-                <Tooltip title={user.userData.email} className="cursor-pointer">
-                  <p>{user.userData.fullname} </p>
-                </Tooltip>
-                {user.isAdmin && (
-                  <p className="text-xs italic text-gray-300">(Admin)</p>
-                )}
+              <div className="flex items-center justify-between gap-3 group">
+                <div className="flex items-center gap-2">
+                  <img
+                    src={
+                      user.userData.profPict ? user.userData.profPict : photoURL
+                    }
+                    alt="profile"
+                    width="23"
+                    height="23"
+                    className="border border-gray-300 rounded-full"
+                  />
+                  <Tooltip
+                    title={user.userData.email}
+                    className="cursor-pointer"
+                  >
+                    <p>{user.userData.fullname} </p>
+                  </Tooltip>
+                  {user.isAdmin && (
+                    <p className="text-xs italic text-gray-300">(Admin)</p>
+                  )}
+                </div>
+                {isCurrentUserAdmin() &&
+                  currentUserEmail !== user.userData.email && (
+                    <div className={`visible md:invisible group-hover:visible`}>
+                      <MemberMenu
+                        isAdmin={user.isAdmin}
+                        email={user.userData.email}
+                      />
+                    </div>
+                  )}
               </div>
             ))
           ) : (
