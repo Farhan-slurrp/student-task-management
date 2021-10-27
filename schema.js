@@ -169,6 +169,7 @@ exports.typeDefs = gql`
     createRoom(roomName: String!, userEmail: String!): Boolean
     joinRoom(roomID: ID!, userEmail: String!): SuccessMessage
     addAdmin(roomID: ID!, userEmail: String!): SuccessMessage
+    deleteAdmin(roomID: ID!, userEmail: String!): SuccessMessage
     leaveRoom(roomID: ID!, userEmail: String!): Boolean
     addRoomTask(
       content: String!

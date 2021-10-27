@@ -360,7 +360,35 @@ const Mutation = {
         },
       });
       if (success)
-        return { success: true, message: "The user prmoted as admin" };
+        return { success: true, message: "The user promoted as admin" };
+    } catch (err) {
+      if (err.kind == "ObjectId") {
+        return { success: false, message: "Invalid room ID" };
+      }
+      return { success: false, message: "An error occured" };
+    }
+  },
+
+  // delete admin room
+  deleteAdmin: async (parent, { roomID, userEmail }, { RoomModel }) => {
+    const newMember = { email: userEmail, isAdmin: false };
+    try {
+      const room = await RoomModel.findById(roomID);
+
+      const isExist = room.members.find((member) => member.email === userEmail);
+      if (!isExist)
+        return { success: false, message: "User is not room members" };
+
+      const success = await RoomModel.findByIdAndUpdate(roomID, {
+        $set: {
+          members: [
+            ...room.members.filter((member) => member.email != userEmail),
+            newMember,
+          ],
+        },
+      });
+      if (success)
+        return { success: true, message: "The user demoted as admin" };
     } catch (err) {
       if (err.kind == "ObjectId") {
         return { success: false, message: "Invalid room ID" };
