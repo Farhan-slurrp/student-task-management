@@ -31,28 +31,15 @@ function MyApp({ Component, pageProps }) {
     }
   }, []);
 
-  if (router.pathname.startsWith("/login")) {
+  if (
+    router.pathname.startsWith("/login") ||
+    router.pathname.startsWith("/acc-error")
+  ) {
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Component {...pageProps} />
       </ThemeProvider>
-    );
-  }
-
-  if (router.pathname.startsWith("/acc-error")) {
-    return (
-      // GraphQL client provider
-      <ApolloProvider client={apolloClient}>
-        {/* Context API for app data */}
-        <AppStoreProvider>
-          <ThemeProvider theme={theme}>
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <CssBaseline />
-            <Component {...pageProps} />
-          </ThemeProvider>
-        </AppStoreProvider>
-      </ApolloProvider>
     );
   }
 

@@ -1,11 +1,17 @@
+import { useRouter } from "next/router";
 import React from "react";
 import ErrorLottie from "../components/ErrorLottie";
-import { useAppStore } from "../stores/AppContext";
+import firebase from "../firebase/clientApp";
 
 interface Props {}
 
 const AccountError = (props: Props) => {
-  const { handleSignOut } = useAppStore();
+  const router = useRouter();
+  // trigger when logout button clicked
+  const handleSignOut = async () => {
+    await firebase.auth().signOut();
+    router.replace("/login");
+  };
 
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen gap-8">
