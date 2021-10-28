@@ -40,6 +40,22 @@ function MyApp({ Component, pageProps }) {
     );
   }
 
+  if (router.pathname.startsWith("/acc-error")) {
+    return (
+      // GraphQL client provider
+      <ApolloProvider client={apolloClient}>
+        {/* Context API for app data */}
+        <AppStoreProvider>
+          <ThemeProvider theme={theme}>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </AppStoreProvider>
+      </ApolloProvider>
+    );
+  }
+
   return (
     // GraphQL client provider
     <ApolloProvider client={apolloClient}>

@@ -51,10 +51,22 @@ export const AppStoreProvider = ({ children }) => {
     router.replace("/login");
   }
 
+  if (user && !user.email) {
+    // go to error page if email doesnt exist
+    router.replace("/acc-error");
+  }
+
   const getTaskType = () => {
     if (router.route.includes("/rooms/[room-id")) return "room";
     if (router.route.includes("/task-sections/[section-id")) return "personal";
     return "";
+  };
+
+  // trigger when logout button clicked
+  const handleSignOut = async () => {
+    await firebase.auth().signOut();
+    router.replace("/login");
+    return <></>;
   };
 
   return (
@@ -67,6 +79,7 @@ export const AppStoreProvider = ({ children }) => {
         setActiveTask,
         isSidebarOpen,
         setIsSidebarOpen,
+        handleSignOut,
       }}
     >
       <UserStoreProvider>

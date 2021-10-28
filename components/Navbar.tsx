@@ -11,14 +11,8 @@ export interface NavbarProps {}
 const Navbar: React.FunctionComponent<NavbarProps> = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
   const { userData } = useUserStore();
-  const { isSidebarOpen, setIsSidebarOpen } = useAppStore();
+  const { isSidebarOpen, setIsSidebarOpen, handleSignOut } = useAppStore();
   const router = useRouter();
-
-  // trigger when logout button clicked
-  const handleSignOut = async () => {
-    await firebase.auth().signOut();
-    router.replace("/login");
-  };
 
   const getNavTitle = () => {
     if (router.route == "/")

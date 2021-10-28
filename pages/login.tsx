@@ -36,10 +36,10 @@ const Login: React.FunctionComponent<LoginProps> = () => {
 
   if (loading) return <Loading />;
   else if (error) return <div>Error</div>;
-  else if (user) {
-    // user is already logged in, redirect to home page
-    router.replace("/");
-  }
+  // else if (user) {
+  //   // user is already logged in, redirect to home page
+  //   router.replace("/");
+  // }
 
   return (
     <>

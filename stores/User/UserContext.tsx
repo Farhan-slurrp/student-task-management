@@ -61,7 +61,7 @@ export const UserStoreProvider = ({ children }) => {
       if (!isUser) {
         const newUser = await saveUser(
           user.email,
-          user.displayName,
+          user.displayName || "",
           user.photoURL
         );
         console.log(newUser);
