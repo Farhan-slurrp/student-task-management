@@ -8,9 +8,7 @@ import ModalComp from "../../../components/Modal";
 import Tooltip from "@material-ui/core/Tooltip";
 import TaskMenu from "../../../components/task/TaskMenu";
 import Head from "next/head";
-import { NotificationManager } from "react-notifications";
 import format from "date-fns/format";
-import addNotification from "react-push-notification";
 import "react-push-notification/dist/notifications/Notification.css";
 import { useAppStore } from "../../../stores/AppContext";
 import { GetStaticPaths } from "next";
@@ -56,36 +54,6 @@ export default function RoomPage({ params }: RoomProps): ReactElement {
       );
     }
   }, [roomTasks]);
-
-  const createNotification = (content: string, due: Date) => {
-    NotificationManager.info(
-      `${content} (Due: ${format(due, "dd/MM/yyyy")})`,
-      "Task Notification",
-      5000
-    );
-    addNotification({
-      title: "Task Notification",
-      subtitle: "Today",
-      message: `${content} (Due: ${format(due, "dd/MM/yyyy")})`,
-      native: true, // when using native, your OS will handle theming.
-    });
-  };
-
-  React.useEffect(() => {
-    if (allTasks) {
-      const tasks = allTasks
-        .filter((task) => task.status !== "DONE")
-        .filter(
-          (task) =>
-            format(task.dueDate.toDate(), "dd/MM/yyyy") ===
-            format(new Date(Date.now()), "dd/MM/yyyy")
-        );
-
-      tasks.forEach((task) => {
-        return createNotification(task.content, task.dueDate.toDate());
-      });
-    }
-  }, []);
 
   const getColumnTasks = (status: string) => {
     if (!allTasks) return [];

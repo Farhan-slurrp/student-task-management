@@ -14,8 +14,6 @@ import getTaskRecomendation from "../../utils/taskRecommendation";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import { useTaskStore } from "../../stores/Task/TaskContext";
 import { useAppStore } from "../../stores/AppContext";
-import { NotificationManager } from "react-notifications";
-import addNotification from "react-push-notification";
 import "react-push-notification/dist/notifications/Notification.css";
 
 export interface TaskSectionProps {}
@@ -27,35 +25,6 @@ const TaskSection: React.FunctionComponent<TaskSectionProps> = () => {
     useAppStore();
   const [openModal, setModalOpen] = React.useState(false);
   const sectionId = router.query["section-id"];
-
-  const createNotification = (content: string, due: Date) => {
-    NotificationManager.info(
-      `${content} (Due: ${format(due, "dd/MM/yyyy")})`,
-      "Task Notification",
-      5000
-    );
-    addNotification({
-      title: "Task Notification",
-      subtitle: "Today",
-      message: `${content} (Due: ${format(due, "dd/MM/yyyy")})`,
-      native: true, // when using native, your OS will handle theming.
-    });
-  };
-
-  React.useEffect(() => {
-    const tasks = userData.user.taskSections
-      .find((section) => section.id === sectionId)
-      .tasks.filter((task) => task.status !== "DONE")
-      .filter(
-        (task) =>
-          format(new Date(task.dueDate), "dd/MM/yyyy") ===
-          format(new Date(Date.now()), "dd/MM/yyyy")
-      );
-
-    tasks.forEach((task) => {
-      return createNotification(task.content, new Date(task.dueDate));
-    });
-  }, []);
 
   const getColumnTasks = (status: string) => {
     if (!userData) return [];

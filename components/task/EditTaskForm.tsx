@@ -9,6 +9,9 @@ import DateFnsUtils from "@date-io/date-fns";
 import { useRouter } from "next/router";
 import { useTaskStore } from "../../stores/Task/TaskContext";
 import { useRoomTaskStore } from "../../stores/RoomTask/RoomTaskContext";
+import { NotificationManager } from "react-notifications";
+import addNotification from "react-push-notification";
+import { format } from "date-fns";
 
 export interface EditTaskFormProps {
   data: {
@@ -54,6 +57,20 @@ const EditTaskForm: React.FunctionComponent<EditTaskFormProps> = ({
     }
   }, []);
 
+  const createNotification = (content: string, due: Date) => {
+    NotificationManager.info(
+      `${content} (Due: ${format(due, "dd/MM/yyyy")})`,
+      "Task Notification",
+      5000
+    );
+    addNotification({
+      title: "Task Notification",
+      subtitle: "Today",
+      message: `${content} (Due: ${format(due, "dd/MM/yyyy")})`,
+      native: true, // when using native, your OS will handle theming.
+    });
+  };
+
   const handleSubmit = async (e) => {
     const content = e.target["content"].value;
     const status = e.target["status"].value;
@@ -77,6 +94,7 @@ const EditTaskForm: React.FunctionComponent<EditTaskFormProps> = ({
           priority,
           estimated
         );
+        createNotification(content, new Date(dueDate));
         refreshData();
         resetForm(e);
         handleClose();
@@ -94,6 +112,7 @@ const EditTaskForm: React.FunctionComponent<EditTaskFormProps> = ({
           dueDate,
           priority,
         });
+        createNotification(content, new Date(dueDate));
         resetForm(e);
         handleClose();
         break;

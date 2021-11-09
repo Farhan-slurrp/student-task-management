@@ -68,7 +68,7 @@ const TaskMenu: React.FunctionComponent<TaskMenuProps> = ({
       switch (getTaskType()) {
         case "personal":
           await removePersonalTask(task.id);
-          refreshData()
+          refreshData();
           break;
         case "room":
           await removeRoomTask(task.roomId, task.id);
@@ -94,7 +94,7 @@ const TaskMenu: React.FunctionComponent<TaskMenuProps> = ({
           task.priority,
           task.estimatedTime
         );
-        refreshData()
+        refreshData();
         setAnchorEl(null);
         break;
       case "room":
@@ -152,7 +152,7 @@ const TaskMenu: React.FunctionComponent<TaskMenuProps> = ({
   const handleActiveTask = () => {
     if (activeTask === null || activeTask.id !== task.id) setActiveTask(task);
     else setActiveTask(null);
-    refreshData()
+    refreshData();
     setAnchorEl(null);
   };
 
@@ -199,14 +199,14 @@ const TaskMenu: React.FunctionComponent<TaskMenuProps> = ({
           <MenuItem onClick={() => handleWorkingOn(userData.user.email)}>
             <p
               className={`text-sm text-${
-                task.workingOn.find(
+                task.workingOn?.find(
                   (member) => member.email === userData.user.email
                 )
                   ? "red"
                   : "blue"
               }-600`}
             >
-              {task.workingOn.find(
+              {task.workingOn?.find(
                 (member) => member.email === userData.user.email
               )
                 ? "Stop Working"
