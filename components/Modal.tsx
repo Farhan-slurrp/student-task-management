@@ -190,6 +190,7 @@ const ModalComp: React.FunctionComponent<ModalCompProps> = ({
               </label>
               <input
                 name="title"
+                data-testid={type.toString()}
                 type="text"
                 className="w-full p-1 text-gray-800 border border-gray-400 rounded-md outline-none md:w-72 focus:border-blue-600"
                 required
