@@ -24,7 +24,7 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
   };
 
   return (
-    <div className="sticky top-0 z-50 flex flex-col items-center w-full h-auto min-h-full gap-4 py-8 overflow-y-auto bg-gray-800 shadow-md">
+    <div className="sticky top-0 z-50 flex flex-col items-center w-full h-screen gap-4 py-8 overflow-y-auto bg-gray-800 shadow-md">
       <div
         className="flex justify-end w-full px-4 py-2 -mt-6 text-white md:hidden"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
