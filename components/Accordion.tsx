@@ -106,7 +106,7 @@ const Accordion: React.FunctionComponent<AccordionProps> = ({
             </Tooltip>
           )}
           {title !== "Members" ? (
-            <Tooltip title="Add" aria-label="add">
+            <Tooltip id={type.toString()} title="Add" aria-label="add">
               <AddIcon onClick={handleOpen} />
             </Tooltip>
           ) : (
