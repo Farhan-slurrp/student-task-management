@@ -133,7 +133,7 @@ const Accordion: React.FunctionComponent<AccordionProps> = ({
             content.map((item) => (
               <Link key={item.id} href={getRedirectURL(item.id)}>
                 <div
-                  id={item.roomName}
+                  id={title === "Rooms" ? item.roomName : item.title}
                   className={`group flex items-center justify-between p-2 hover:bg-gray-900 cursor-pointer ${
                     isCurrentRoute(item.id) ? "bg-blue-400 bg-opacity-5" : ""
                   }`}
