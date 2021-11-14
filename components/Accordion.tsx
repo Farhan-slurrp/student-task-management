@@ -133,6 +133,7 @@ const Accordion: React.FunctionComponent<AccordionProps> = ({
             content.map((item) => (
               <Link key={item.id} href={getRedirectURL(item.id)}>
                 <div
+                  id={item.roomName}
                   className={`group flex items-center justify-between p-2 hover:bg-gray-900 cursor-pointer ${
                     isCurrentRoute(item.id) ? "bg-blue-400 bg-opacity-5" : ""
                   }`}
@@ -145,7 +146,10 @@ const Accordion: React.FunctionComponent<AccordionProps> = ({
                     # {title === "Rooms" ? item.roomName : item.title}
                   </p>
 
-                  <div className="visible md:invisible group-hover:visible">
+                  <div
+                    id="menu"
+                    className="visible md:invisible group-hover:visible"
+                  >
                     <SidebarMenu
                       id={item.id}
                       title={item.title}
