@@ -108,12 +108,16 @@ const SidebarMenu: React.FunctionComponent<SidebarMenuProps> = ({
         )}
         {menuTitle !== "Rooms" && (
           <MenuItem onClick={handleModalOpen}>
-            <p className="text-sm text-green-600">Edit</p>
+            <p id="edit" className="text-sm text-green-600">
+              Edit
+            </p>
           </MenuItem>
         )}
         {menuTitle !== "Rooms" && (
           <MenuItem onClick={handleDelete}>
-            <p className="text-sm text-red-500">Delete</p>
+            <p id="delete" className="text-sm text-red-500">
+              Delete
+            </p>
           </MenuItem>
         )}
         <MenuItem onClick={handleClose}>

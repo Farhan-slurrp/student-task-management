@@ -122,7 +122,7 @@ const Accordion: React.FunctionComponent<AccordionProps> = ({
             handleClose={handleClose}
             payload={{ title: payload }}
           />
-          <div onClick={() => setIsActive(!isActive)}>
+          <div id="expand" onClick={() => setIsActive(!isActive)}>
             {isActive ? <ExpandLessIcon /> : <ExpandMoreIcon />}
           </div>
         </div>
